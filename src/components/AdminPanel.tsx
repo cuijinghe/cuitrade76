@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { 
   X, Check, Trash2, Download, RefreshCw, FileText, 
-  Image as ImageIcon, Type, ExternalLink, Calendar, CheckCircle2, AlertCircle 
+  Image as ImageIcon, Type, ExternalLink, Calendar, CheckCircle2, AlertCircle, Upload
 } from 'lucide-react';
 import { SiteConfig, Inquiry, ServiceItem } from '../types';
 
@@ -25,7 +25,7 @@ export default function AdminPanel({
   onUpdateInquiryStatus,
   onResetToDefault 
 }: AdminPanelProps) {
-  const [activeTab, setActiveTab] = useState<'inquiries' | 'images' | 'text'>('inquiries');
+  const [activeTab, setActiveTab] = useState<'inquiries' | 'images' | 'text' | 'backup'>('inquiries');
   const [editConfig, setEditConfig] = useState<SiteConfig>({ ...config });
   const [selectedInquiry, setSelectedInquiry] = useState<Inquiry | null>(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
@@ -185,6 +185,18 @@ export default function AdminPanel({
           >
             <Type className="h-4 w-4" />
             <span>텍스트 및 문구 편집</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('backup')}
+            className={`flex items-center gap-2 border-b-2 py-4 px-3 text-xs sm:text-sm font-semibold cursor-pointer ${
+              activeTab === 'backup' 
+                ? 'border-brand-navy text-brand-navy' 
+                : 'border-transparent text-slate-400 hover:text-slate-600'
+            }`}
+          >
+            <Download className="h-4 w-4" />
+            <span>설정 백업 및 코드 추출</span>
           </button>
         </div>
 
@@ -367,25 +379,64 @@ export default function AdminPanel({
             <div className="space-y-8 text-left max-w-4xl mx-auto">
               <div>
                 <h3 className="font-display text-sm font-bold text-brand-navy mb-2">
-                  홈페이지 대표 비주얼 이미지 URL 교체
+                  홈페이지 대표 비주얼 이미지 URL 교체 및 직접 업로드
                 </h3>
                 <p className="text-xs text-slate-400">
-                  관리자 모드 활성화 시 각 섹션에서도 직관적으로 편집할 수 있습니다. 인터넷 Unsplash 또는 외부 이미지 소스 링크를 입력하고 저장을 누르면 즉시 렌더링됩니다.
+                  관리자 모드 활성화 시 각 섹션에서도 직관적으로 편집할 수 있습니다. 인터넷 Unsplash/외부 링크를 입력하거나, 컴퓨터에 있는 이미지 파일을 직접 업로드하여 저장할 수 있습니다.
                 </p>
               </div>
 
               <div className="space-y-6">
                 {/* 1. Hero Image */}
                 <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-5">
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                    메인 히어로 대표 사진 URL
-                  </label>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                      메인 히어로 대표 사진 URL 및 직접 업로드
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            if (file.size > 2.5 * 1024 * 1024) {
+                              alert('이미지 용량이 너무 큽니다. 2.5MB 이하의 이미지만 업로드 가능합니다.');
+                              return;
+                            }
+                            const reader = new FileReader();
+                            reader.onload = (event) => {
+                              const result = event.target?.result;
+                              if (typeof result === 'string') {
+                                handleConfigChange('hero', 'imageUrl', result);
+                              }
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                        className="hidden"
+                        id="admin-hero-file-upload"
+                      />
+                      <label
+                        htmlFor="admin-hero-file-upload"
+                        className="flex items-center gap-1.5 rounded-lg bg-brand-blue/10 px-3 py-1.5 text-xs font-bold text-brand-blue hover:bg-brand-blue/20 cursor-pointer transition-colors"
+                      >
+                        <Upload className="h-3.5 w-3.5" />
+                        <span>컴퓨터에서 파일 업로드 (Base64)</span>
+                      </label>
+                    </div>
+                  </div>
                   <input
                     type="text"
                     value={editConfig.hero.imageUrl}
                     onChange={(e) => handleConfigChange('hero', 'imageUrl', e.target.value)}
                     className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs text-slate-700 font-mono"
                   />
+                  {editConfig.hero.imageUrl.startsWith('data:image/') && (
+                    <p className="mt-1.5 text-[10px] font-bold text-emerald-600">
+                      ✓ 컴퓨터에서 직접 업로드한 이미지 파일이 데이터(Base64) 형태로 적용되었습니다.
+                    </p>
+                  )}
                   <div className="mt-3 flex flex-wrap items-center gap-2">
                     <span className="text-[11px] font-bold text-slate-400">추천 프리셋:</span>
                     {imagePresets.hero.map((ps) => (
@@ -402,15 +453,54 @@ export default function AdminPanel({
 
                 {/* 2. Director Profile Image */}
                 <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-5">
-                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                    대표자 프로필 사진 URL
-                  </label>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                      대표자 프로필 사진 URL 및 직접 업로드
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            if (file.size > 2.5 * 1024 * 1024) {
+                              alert('이미지 용량이 너무 큽니다. 2.5MB 이하의 이미지만 업로드 가능합니다.');
+                              return;
+                            }
+                            const reader = new FileReader();
+                            reader.onload = (event) => {
+                              const result = event.target?.result;
+                              if (typeof result === 'string') {
+                                handleConfigChange('director', 'imageUrl', result);
+                              }
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                        className="hidden"
+                        id="admin-director-file-upload"
+                      />
+                      <label
+                        htmlFor="admin-director-file-upload"
+                        className="flex items-center gap-1.5 rounded-lg bg-brand-blue/10 px-3 py-1.5 text-xs font-bold text-brand-blue hover:bg-brand-blue/20 cursor-pointer transition-colors"
+                      >
+                        <Upload className="h-3.5 w-3.5" />
+                        <span>컴퓨터에서 파일 업로드 (Base64)</span>
+                      </label>
+                    </div>
+                  </div>
                   <input
                     type="text"
                     value={editConfig.director.imageUrl}
                     onChange={(e) => handleConfigChange('director', 'imageUrl', e.target.value)}
                     className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs text-slate-700 font-mono"
                   />
+                  {editConfig.director.imageUrl.startsWith('data:image/') && (
+                    <p className="mt-1.5 text-[10px] font-bold text-emerald-600">
+                      ✓ 컴퓨터에서 직접 업로드한 이미지 파일이 데이터(Base64) 형태로 적용되었습니다.
+                    </p>
+                  )}
                   <div className="mt-3 flex flex-wrap items-center gap-2">
                     <span className="text-[11px] font-bold text-slate-400">추천 프리셋:</span>
                     {imagePresets.director.map((ps) => (
@@ -427,19 +517,58 @@ export default function AdminPanel({
 
                 {/* 3. Service Card Images */}
                 <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-6 space-y-6">
-                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-                    사회 혁신 프로젝트 4개 카드 이미지
+                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider border-b border-slate-200/50 pb-2">
+                    사회 혁신 프로젝트 4개 카드 이미지 및 직접 업로드
                   </h4>
                   
                   {editConfig.services.items.map((item) => (
                     <div key={item.id} className="border-t border-slate-200/50 pt-4 first:border-0 first:pt-0">
-                      <p className="text-xs font-bold text-slate-600 mb-2">{item.title}</p>
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                        <p className="text-xs font-bold text-slate-600">{item.title}</p>
+                        <div className="relative">
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (file) {
+                                if (file.size > 2.5 * 1024 * 1024) {
+                                  alert('이미지 용량이 너무 큽니다. 2.5MB 이하의 이미지만 업로드 가능합니다.');
+                                  return;
+                                }
+                                const reader = new FileReader();
+                                reader.onload = (event) => {
+                                  const result = event.target?.result;
+                                  if (typeof result === 'string') {
+                                    handleServiceChange(item.id, 'imageUrl', result);
+                                  }
+                                };
+                                reader.readAsDataURL(file);
+                              }
+                            }}
+                            className="hidden"
+                            id={`admin-service-file-upload-${item.id}`}
+                          />
+                          <label
+                            htmlFor={`admin-service-file-upload-${item.id}`}
+                            className="flex items-center gap-1.5 rounded-lg bg-slate-100 border border-slate-200 px-2 py-1 text-[11px] font-bold text-slate-700 hover:bg-slate-200 cursor-pointer transition-colors"
+                          >
+                            <Upload className="h-3 w-3" />
+                            <span>파일 업로드</span>
+                          </label>
+                        </div>
+                      </div>
                       <input
                         type="text"
                         value={item.imageUrl}
                         onChange={(e) => handleServiceChange(item.id, 'imageUrl', e.target.value)}
                         className="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs text-slate-700 font-mono"
                       />
+                      {item.imageUrl.startsWith('data:image/') && (
+                        <p className="mt-1 text-[10px] font-bold text-emerald-600">
+                          ✓ 업로드된 이미지 파일 적용됨
+                        </p>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -450,7 +579,7 @@ export default function AdminPanel({
                 {saveSuccess ? (
                   <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-600">
                     <CheckCircle2 className="h-4 w-4" />
-                    <span>이미지 URL 변경 사항이 정상 저장되었습니다.</span>
+                    <span>이미지 변경 사항이 정상 저장되었습니다.</span>
                   </div>
                 ) : <span />}
 
@@ -608,6 +737,65 @@ export default function AdminPanel({
                 >
                   변경 텍스트 영구 저장
                 </button>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 4: BACKUP & RESTORE */}
+          {activeTab === 'backup' && (
+            <div className="space-y-8 text-left max-w-4xl mx-auto">
+              <div>
+                <h3 className="font-display text-sm font-bold text-brand-navy mb-2">
+                  설정 백업 및 영구 반영 코드 복사
+                </h3>
+                <p className="text-xs text-slate-400">
+                  현재 브라우저에 저장된 모든 이미지(업로드한 Base64 데이터 포함)와 텍스트 설정값입니다.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-6 space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">현재 설정 JSON 데이터</span>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(JSON.stringify(config, null, 2));
+                      alert('설정 데이터가 클립보드에 복사되었습니다! 이 JSON 텍스트를 복사하여 AI 개발자에게 채팅으로 전달해주시면 모든 사용자에게 영구적으로 적용됩니다.');
+                    }}
+                    className="flex items-center gap-1.5 rounded-lg bg-brand-navy px-3 py-1.5 text-xs font-semibold text-white hover:bg-brand-blue cursor-pointer"
+                  >
+                    <Check className="h-3.5 w-3.5" />
+                    <span>설정 JSON 복사하기</span>
+                  </button>
+                </div>
+                
+                <textarea
+                  readOnly
+                  rows={10}
+                  value={JSON.stringify(config, null, 2)}
+                  className="w-full rounded-xl border border-slate-200 bg-white p-4 text-xs text-slate-600 font-mono focus:outline-none"
+                />
+
+                <div className="rounded-xl bg-blue-50/70 border border-blue-100 p-4 flex gap-3">
+                  <AlertCircle className="h-5 w-5 text-brand-blue shrink-0 mt-0.5" />
+                  <div className="text-xs text-slate-600 leading-relaxed">
+                    <p className="font-bold text-brand-navy mb-1">💡 중요 안내: 변경한 사진이 새 브라우저나 타인에게 보이지 않는 이유</p>
+                    <p className="mb-1">
+                      현재 사이트는 <strong>클라이언트 사이드 단일 페이지 웹앱(SPA)</strong>으로 설계되어 있습니다. Admin 패널이나 이미지 업로드를 통해 수정한 정보는 <strong>방문자 본인의 브라우저 캐시(localStorage)</strong>에 우선 저장됩니다.
+                    </p>
+                    <p className="mb-1">
+                      이 때문에 새 창(시크릿 창)을 열거나 다른 사람의 기기로 접속하면 해당 브라우저의 캐시가 비어있기 때문에 최초 소스코드에 내장된 기본값(외국인 사진 또는 fallback 이미지)이 대신 보여지게 됩니다.
+                    </p>
+                    <p className="mb-1">
+                      이 때문에 본인 브라우저가 아닌 기기에서도 사진이 유지되도록 하려면, <strong>업로드한 이미지 데이터가 포함된 이 설정 코드를 복사해서 AI에게 주셔야 실제 웹서버 코드에 빌드해 배포할 수 있습니다!</strong>
+                    </p>
+                    <p className="font-bold text-brand-navy mt-2">🛠️ 해결 방법 (영구 반영하기):</p>
+                    <ol className="list-decimal pl-4 space-y-1 mt-1">
+                      <li>위의 <strong>[설정 JSON 복사하기]</strong> 버튼을 클릭하여 설정 코드를 복사합니다.</li>
+                      <li>복사한 내용을 AI 코딩 어시스턴트(Gemini) 빌드 채팅방에 그대로 붙여넣으며 <strong>&quot;이 설정값으로 전체 사이트 기본값을 업데이트해줘&quot;</strong>라고 요청해 주세요.</li>
+                      <li>저희가 이 코드(이미지 Base64 데이터 포함)를 실제 소스코드에 영구 반영하여 Git 커밋 및 배포(Publish)를 완료하면, <strong>전 세계 모든 방문자에게 업로드하신 사진과 텍스트가 완벽하게 보여집니다!</strong></li>
+                    </ol>
+                  </div>
+                </div>
               </div>
             </div>
           )}
