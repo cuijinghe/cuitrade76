@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AIVEXA - AI FOR PEOPLE & COMMUNITIES</title>
+    <link rel="canonical" href="https://aivexa.co.kr/" />
+    <script>
+      (function() {
+        try {
+          var _fetch = window.fetch || globalThis.fetch;
+          var defineFetch = function(obj) {
+            try {
+              Object.defineProperty(obj, 'fetch', {
+                get: function() { return _fetch; },
+                set: function(val) { _fetch = val; },
+                configurable: true,
+                enumerable: true
+              });
+            } catch (e) {
+              console.warn('Failed to define fetch on', obj, e);
+            }
+          };
+          defineFetch(window);
+          defineFetch(globalThis);
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            defineFetch(Window.prototype);
+          }
+        } catch (e) {
+          console.warn('Failed to patch fetch:', e);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

@@ -1,0 +1,6 @@
+{
+  "name": "AIVEXA",
+  "description": "AI FOR PEOPLE & COMMUNITIES - 공공기관, 지자체, 기업 CSR/ESG 협력 AI 소셜 임팩트 프로젝트 기획 파트너",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
