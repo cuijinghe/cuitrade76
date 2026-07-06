@@ -3,11 +3,11 @@ import { SiteConfig } from '../types';
 export const DEFAULT_SITE_CONFIG: SiteConfig = {
   hero: {
     slogan: 'AI FOR PEOPLE & COMMUNITIES',
-    title: 'AI가 아니라 사람을 먼저 생각합니다.\n공공기관·기업과 함께\n소상공인과 외국인을 위한\n실전 프로젝트를 기획합니다.',
-    subtitle: '20년 이상의 글로벌 무역·해외영업 경험과 중국어 전문성을 바탕으로 공공기관, 기업과 협력하여 소상공인과 외국인을 위한 실전 프로젝트를 기획하고 운영합니다. AI는 목적이 아니라 더 큰 사회적 가치를 만드는 도구입니다.',
+    title: 'AI가 아니라 사람을 먼저 생각합니다.\n공공기관·기업과 함께\nAI 교육·업무혁신·사회혁신 프로젝트를\n기획하고 운영합니다.',
+    subtitle: '20년 이상의 글로벌 비즈니스 경험과 중국어 전문성을 바탕으로 공공기관, 기업, 소상공인, 외국인을 위한 AI 교육, 업무혁신, 사회혁신 및 글로벌 협력 프로젝트를 기획하고 운영합니다. AIVEXA는 AI 기술보다 사람과 현장의 문제 해결을 우선하는 프로젝트 파트너입니다.',
     imageUrl: '/hero.jpg',
     imageTagline: 'AIVEXA PROJECT PARTNER',
-    imageSubTagline: '지속 가능한 사회 혁신을 위한 기획'
+    imageSubTagline: '사람과 현장을 위한 AI 프로젝트 기획'
   },
   services: {
     title: '함께 만드는 사회 혁신',

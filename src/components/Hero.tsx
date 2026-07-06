@@ -45,7 +45,7 @@ export default function Hero({ config, onNavigate, isAdminMode, onEditImage }: H
               className="font-display tracking-tight text-brand-navy"
               id="hero-heading"
             >
-              <span className="block text-3xl sm:text-4xl lg:text-5xl font-extrabold lg:leading-[1.2] mb-4">
+              <span className="block text-3xl sm:text-4xl lg:text-5xl font-extrabold lg:leading-[1.2] mb-4 break-keep md:whitespace-nowrap">
                 {mainTitle}
               </span>
               {subTitleLines.length > 0 && (
@@ -109,7 +109,7 @@ export default function Hero({ config, onNavigate, isAdminMode, onEditImage }: H
               {/* Primary Representative Photo */}
               <img 
                 src={config.imageUrl} 
-                alt="AIVEXA Representative Partnership" 
+                alt="AIVEXA AI 교육 업무혁신 사회혁신 프로젝트 기획 파트너 최경하 대표" 
                 className="h-full w-full object-cover transition-transform duration-700 group-hover/heroimg:scale-[1.03]"
                 referrerPolicy="no-referrer"
                 id="hero-representative-image"

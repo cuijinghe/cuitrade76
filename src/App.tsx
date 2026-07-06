@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import Services from './components/Services';
-import Partnership from './components/Partnership';
-import Director from './components/Director';
-import InquiryForm from './components/InquiryForm';
 import AdminPanel from './components/AdminPanel';
 import ImageSelectorModal from './components/ImageSelectorModal';
 import { DEFAULT_SITE_CONFIG } from './data/defaultConfig';
 import { SiteConfig, Inquiry } from './types';
-import { Shield, Mail, Phone, ChevronRight, Edit3, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Shield, Mail, Phone, ChevronRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
+
+// Import newly created pages
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
+import ProjectsPage from './pages/ProjectsPage';
+import PartnersPage from './pages/PartnersPage';
+import FAQPage from './pages/FAQPage';
+import ContactPage from './pages/ContactPage';
 
 // Pre-seeded authentic B2B inquiries for realistic live-preview experience
 const INITIAL_INQUIRIES: Inquiry[] = [
@@ -44,13 +49,94 @@ const INITIAL_INQUIRIES: Inquiry[] = [
   }
 ];
 
-export default function App() {
+function Breadcrumb({ currentPath }: { currentPath: string }) {
+  const navigate = useNavigate();
+  const pathNames: Record<string, string> = {
+    '/about': '소개',
+    '/services': '서비스',
+    '/projects': '프로젝트 영역',
+    '/partners': '협력 모델',
+    '/faq': 'FAQ',
+    '/contact': '프로젝트 문의',
+  };
+
+  const displayName = pathNames[currentPath] || '';
+
+  if (!displayName) return null;
+
+  return (
+    <div className="bg-slate-50 border-b border-slate-100 py-4 text-left">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-500">
+        <span 
+          onClick={() => {
+            navigate('/');
+          }} 
+          className="hover:text-brand-blue font-semibold transition-colors cursor-pointer"
+        >
+          홈
+        </span>
+        <ChevronRight className="h-3 w-3 text-slate-300" />
+        <span className="text-brand-navy font-bold">{displayName}</span>
+      </div>
+    </div>
+  );
+}
+
+function AppContent() {
   const [config, setConfig] = useState<SiteConfig>(DEFAULT_SITE_CONFIG);
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [panelTabHint, setPanelTabHint] = useState<'inquiries' | 'images' | 'text'>('inquiries');
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const pathname = location.pathname;
+
+  // Dynamically update document title and description based on pathname
+  useEffect(() => {
+    let title = 'AIVEXA - AI FOR PEOPLE & COMMUNITIES';
+    let description = '20년 이상의 글로벌 무역·해외영업 경험과 중국어 전문성을 바탕으로 공공기관, 기업과 협력하여 소상공인과 외국인을 위한 실전 프로젝트를 기획하고 운영합니다. AI는 목적이 아니라 더 큰 사회적 가치를 만드는 도구입니다.';
+
+    switch (pathname) {
+      case '/about':
+        title = '소개 - AIVEXA';
+        description = '20년 이상의 글로벌 비즈니스 실무 경험을 가진 전문가가 사람을 위한 도구로서의 AI 프로젝트를 기획합니다.';
+        break;
+      case '/services':
+        title = '서비스 - AIVEXA';
+        description = '공공기관 협력, 기업 CSR/ESG, 소상공인 및 외국인 지원을 아우르는 실행 중심의 비즈니스 솔루션을 설계합니다.';
+        break;
+      case '/projects':
+        title = '프로젝트 영역 - AIVEXA';
+        description = '공공과 민간의 소통과 협력을 이끄는 실제 프로젝트 포트폴리오 및 핵심 가치를 소개합니다.';
+        break;
+      case '/partners':
+        title = '협력 모델 - AIVEXA';
+        description = '지자체, 공공기관 및 기업 실무 담당자의 높은 행정 프로세스 이해도를 바탕으로 한 지속 가능한 협력 파트너십.';
+        break;
+      case '/faq':
+        title = 'FAQ - AIVEXA';
+        description = 'AIVEXA 서비스, 프로젝트 협력 모델 및 문의 진행 방식에 대한 자주 묻는 질문을 확인하세요.';
+        break;
+      case '/contact':
+        title = '프로젝트 문의 - AIVEXA';
+        description = '성공적인 공공 및 기업 CSR 프로젝트 기획을 위한 맞춤형 제안서와 제안 내용을 문의하세요.';
+        break;
+    }
+
+    document.title = title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', description);
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = description;
+      document.head.appendChild(meta);
+    }
+  }, [pathname]);
 
   // Direct Image selector state
   const [imageSelector, setImageSelector] = useState<{
@@ -67,7 +153,7 @@ export default function App() {
 
   // Load state from localStorage on init
   useEffect(() => {
-    const savedConfig = localStorage.getItem('aivexa_site_config_v3');
+    const savedConfig = localStorage.getItem('aivexa_site_config_v3') || localStorage.getItem('aivexa_site_config_v4');
     if (savedConfig) {
       try {
         const parsed = JSON.parse(savedConfig);
@@ -82,6 +168,11 @@ export default function App() {
         if (isOldDefaultHero || !parsed.hero?.imageUrl) {
           parsed.hero.imageUrl = '/hero.jpg';
         }
+
+        // Ensure "생각합니다." is added if missing
+        if (parsed.hero && parsed.hero.title && parsed.hero.title.includes('AI가 아니라 사람을 먼저') && !parsed.hero.title.includes('생각합니다.')) {
+          parsed.hero.title = parsed.hero.title.replace('AI가 아니라 사람을 먼저', 'AI가 아니라 사람을 먼저 생각합니다.');
+        }
         
         // Clean up any remaining default foreigner image in services (service-4)
         if (parsed.services?.items) {
@@ -94,14 +185,14 @@ export default function App() {
         }
 
         setConfig(parsed);
-        localStorage.setItem('aivexa_site_config_v3', JSON.stringify(parsed));
+        localStorage.setItem('aivexa_site_config_v4', JSON.stringify(parsed));
       } catch (e) {
         console.error('Failed to parse saved config, using default', e);
         setConfig(DEFAULT_SITE_CONFIG);
       }
     } else {
       setConfig(DEFAULT_SITE_CONFIG);
-      localStorage.setItem('aivexa_site_config_v3', JSON.stringify(DEFAULT_SITE_CONFIG));
+      localStorage.setItem('aivexa_site_config_v4', JSON.stringify(DEFAULT_SITE_CONFIG));
     }
 
     const savedInquiries = localStorage.getItem('aivexa_inquiries');
@@ -144,7 +235,7 @@ export default function App() {
   // Update configuration
   const handleUpdateConfig = (newConfig: SiteConfig) => {
     setConfig(newConfig);
-    localStorage.setItem('aivexa_site_config_v3', JSON.stringify(newConfig));
+    localStorage.setItem('aivexa_site_config_v4', JSON.stringify(newConfig));
   };
 
   // Submit Inquiry
@@ -184,7 +275,7 @@ export default function App() {
   const handleResetToDefault = () => {
     if (confirm('홈페이지 설정과 텍스트, 이미지 경로를 최초 기본값으로 리셋하시겠습니까?')) {
       setConfig(DEFAULT_SITE_CONFIG);
-      localStorage.setItem('aivexa_site_config_v3', JSON.stringify(DEFAULT_SITE_CONFIG));
+      localStorage.setItem('aivexa_site_config_v4', JSON.stringify(DEFAULT_SITE_CONFIG));
       
       setInquiries(INITIAL_INQUIRIES);
       localStorage.setItem('aivexa_inquiries', JSON.stringify(INITIAL_INQUIRIES));
@@ -193,11 +284,27 @@ export default function App() {
   };
 
   const handleNavigate = (sectionId: string) => {
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setActiveSection(sectionId);
+    if (pathname === '/') {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setActiveSection(sectionId);
+        return;
+      }
     }
+
+    const sectionToPath: Record<string, string> = {
+      'hero': '/',
+      'services': '/services',
+      'projects': '/projects',
+      'partnership': '/partners',
+      'director': '/about',
+      'inquiry': '/contact',
+    };
+
+    const path = sectionToPath[sectionId] || '/';
+    navigate(path);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   // Open Admin Panel directly with visual asset editing tab
@@ -230,8 +337,10 @@ export default function App() {
       });
     }
     setConfig(updated);
-    localStorage.setItem('aivexa_site_config_v3', JSON.stringify(updated));
+    localStorage.setItem('aivexa_site_config_v4', JSON.stringify(updated));
   };
+
+  const isHome = pathname === '/' || pathname === '/index.html' || !['/about', '/services', '/projects', '/partners', '/faq', '/contact'].includes(pathname);
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800 antialiased" id="root-layout">
@@ -241,76 +350,96 @@ export default function App() {
         onAdminToggle={() => setIsAdminMode(!isAdminMode)}
         onNavigate={handleNavigate}
         activeSection={activeSection}
+        currentPath={pathname}
+        onLogoClick={() => {
+          navigate('/');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
       />
 
-      {/* Hero section */}
-      <Hero
-        config={config.hero}
-        onNavigate={handleNavigate}
-        isAdminMode={isAdminMode}
-        onEditImage={(currentUrl) => handleOpenImageSelector('hero', currentUrl || config.hero.imageUrl, '메인 히어로 이미지')}
-      />
+      {/* Breadcrumb for subpages */}
+      {!isHome && <Breadcrumb currentPath={pathname} />}
 
-      {/* Services and Projects */}
-      <Services
-        title={config.services.title}
-        items={config.services.items}
-        isAdminMode={isAdminMode}
-        onEditItem={(itemId, currentUrl, title) => handleOpenImageSelector(itemId, currentUrl, title)}
-        onNavigate={handleNavigate}
-      />
-
-      {/* Partnership Model section */}
-      <Partnership
-        title={config.partnership.title}
-        description={config.partnership.description}
-        targets={config.partnership.targets}
-      />
-
-      {/* Director & Partnership Focus Section */}
-      <Director
-        config={config.director}
-        isAdminMode={isAdminMode}
-        onEditImage={(currentUrl) => handleOpenImageSelector('director', currentUrl || config.director.imageUrl, '디렉터 프로필 이미지')}
-      />
-
-      {/* Proposal Inquiry Form */}
-      <InquiryForm
-        onSubmitInquiry={handleAddInquiry}
-      />
-
-      {/* B2B Footprint Info banner */}
-      <section className="bg-slate-50 py-12 border-t border-slate-100">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3 text-left">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white border border-slate-200/60 p-1.5 shadow-sm">
-              <svg viewBox="9 10 29 32" className="h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Navy Left Leg */}
-                <polygon points="11,40 20.3,12 25.3,12 16,40" fill="#0B132B" />
-                {/* Navy Middle Leg Top */}
-                <polygon points="20.3,12 25.3,12 30.6,28 25.6,28" fill="#0B132B" />
-                {/* Navy Crossbar */}
-                <polygon points="20,28 25.6,28 26.8,31.5 18.8,31.5" fill="#0B132B" />
-                {/* Blue Right Leg of X */}
-                <polygon points="21.6,40 30.9,12 35.9,12 26.6,40" fill="#1C3FFD" />
-                {/* Blue Bottom-Right Leg of X */}
-                <polygon points="25.6,28 30.6,28 34.5,40 29.5,40" fill="#1C3FFD" />
-              </svg>
-            </div>
-            <div>
-              <p className="font-display text-sm font-bold text-brand-navy">AIVEXA B2B 제안서 다운로드</p>
-              <p className="text-xs text-slate-400">공공기관 및 기업 CSR/ESG 부서 맞춤형 협력 기획서</p>
-            </div>
-          </div>
-          <button 
-            onClick={() => handleNavigate('inquiry')}
-            className="flex items-center gap-1.5 rounded-full border border-brand-navy px-5 py-2 text-xs font-bold text-brand-navy hover:bg-brand-navy hover:text-white transition-all cursor-pointer"
-          >
-            <span>제안서 및 프로젝트 문의하기</span>
-            <ChevronRight className="h-4 w-4" />
-          </button>
-        </div>
-      </section>
+      {/* Routes configuration with React Router */}
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <HomePage 
+              config={config}
+              isAdminMode={isAdminMode}
+              onOpenImageSelector={handleOpenImageSelector}
+              onNavigate={handleNavigate}
+              onSubmitInquiry={handleAddInquiry}
+            />
+          } 
+        />
+        <Route 
+          path="/about" 
+          element={
+            <AboutPage 
+              config={config}
+              isAdminMode={isAdminMode}
+              onOpenImageSelector={handleOpenImageSelector}
+            />
+          } 
+        />
+        <Route 
+          path="/services" 
+          element={
+            <ServicesPage 
+              config={config}
+              isAdminMode={isAdminMode}
+              onOpenImageSelector={handleOpenImageSelector}
+              onNavigate={handleNavigate}
+            />
+          } 
+        />
+        <Route 
+          path="/projects" 
+          element={
+            <ProjectsPage 
+              config={config}
+              isAdminMode={isAdminMode}
+              onOpenImageSelector={handleOpenImageSelector}
+              onNavigate={handleNavigate}
+            />
+          } 
+        />
+        <Route 
+          path="/partners" 
+          element={
+            <PartnersPage 
+              config={config}
+            />
+          } 
+        />
+        <Route 
+          path="/faq" 
+          element={<FAQPage />} 
+        />
+        <Route 
+          path="/contact" 
+          element={
+            <ContactPage 
+              onSubmitInquiry={handleAddInquiry}
+            />
+          } 
+        />
+        {/* Fallback routing */}
+        <Route 
+          path="*" 
+          element={
+            <HomePage 
+              config={config}
+              isAdminMode={isAdminMode}
+              onOpenImageSelector={handleOpenImageSelector}
+              onNavigate={handleNavigate}
+              onSubmitInquiry={handleAddInquiry}
+            />
+          } 
+        />
+      </Routes>
 
       {/* Footer conforming to all rules and visual expectations */}
       <footer className="bg-brand-navy text-white py-16 border-t border-brand-navy/80">
@@ -373,7 +502,7 @@ export default function App() {
 
       {/* Floating Admin quick edit toggle */}
       {isAdminMode && (
-        <motion.div 
+         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           className="fixed bottom-6 right-6 z-40"
@@ -423,3 +552,12 @@ export default function App() {
     </div>
   );
 }
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  );
+}
+

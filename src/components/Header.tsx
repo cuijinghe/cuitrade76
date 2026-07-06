@@ -6,9 +6,11 @@ interface HeaderProps {
   isAdminMode: boolean;
   onNavigate: (sectionId: string) => void;
   activeSection: string;
+  currentPath?: string;
+  onLogoClick?: () => void;
 }
 
-export default function Header({ onAdminToggle, isAdminMode, onNavigate, activeSection }: HeaderProps) {
+export default function Header({ onAdminToggle, isAdminMode, onNavigate, activeSection, currentPath, onLogoClick }: HeaderProps) {
   const menuItems = [
     { id: 'services', label: '서비스' },
     { id: 'projects', label: '프로젝트 영역' },
@@ -17,11 +19,22 @@ export default function Header({ onAdminToggle, isAdminMode, onNavigate, activeS
     { id: 'inquiry', label: '프로젝트 문의' },
   ];
 
+  const pathToSection: Record<string, string> = {
+    '/': activeSection,
+    '/about': 'director',
+    '/services': 'services',
+    '/projects': 'projects',
+    '/partners': 'partnership',
+    '/contact': 'inquiry',
+  };
+
+  const currentActiveSection = currentPath ? (pathToSection[currentPath] || '') : activeSection;
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-100 bg-white/80 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 sm:px-8 lg:px-12">
         {/* Brand Logo - Styled precisely according to the brand image */}
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <div className="flex items-center gap-3 cursor-pointer" onClick={onLogoClick || (() => window.scrollTo({ top: 0, behavior: 'smooth' }))}>
           <div className="relative flex items-center justify-center h-10">
             {/* Custom SVG Monogram AX matching the brand image */}
             <svg 
@@ -66,7 +79,7 @@ export default function Header({ onAdminToggle, isAdminMode, onNavigate, activeS
               key={item.id}
               onClick={() => onNavigate(item.id)}
               className={`font-display text-sm font-medium transition-colors duration-200 cursor-pointer ${
-                activeSection === item.id
+                currentActiveSection === item.id
                   ? 'text-brand-blue font-semibold'
                   : 'text-slate-600 hover:text-brand-navy'
               }`}
