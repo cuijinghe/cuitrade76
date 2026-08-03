@@ -15,6 +15,8 @@ export interface Inquiry {
   title: string;
   projectBudget: string;
   targetAudience: string;
+  deadline?: string;
+  referenceLink?: string;
   description: string;
   submittedAt: string;
   status: 'pending' | 'reviewing' | 'completed';

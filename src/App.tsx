@@ -16,46 +16,17 @@ import ProjectsPage from './pages/ProjectsPage';
 import PartnersPage from './pages/PartnersPage';
 import FAQPage from './pages/FAQPage';
 import ContactPage from './pages/ContactPage';
+import PrivacyPage from './pages/PrivacyPage';
 
-// Pre-seeded authentic B2B inquiries for realistic live-preview experience
-const INITIAL_INQUIRIES: Inquiry[] = [
-  {
-    id: 'inq-1',
-    companyName: '전남 여수시 사회복지과',
-    department: '외국인지원팀',
-    contactName: '이영희 주무관',
-    email: 'yhlee@yeosu.go.kr',
-    phone: '061-659-1234',
-    title: '다문화가족 및 결혼이민자 여성을 위한 실무형 AI 마케팅 취창업 프로젝트',
-    projectBudget: '1,000만원 ~ 3,000만원',
-    targetAudience: '여수시 관내 결혼이민 여성 및 다문화가족 구성원 30명',
-    description: '관내 정착한 다문화 여성들의 자립을 위해, 최신 이미지/텍스트 AI 생성 도구를 결합한 마케팅 실무 교육과 지역 공방/소상공인 매칭 마케팅 프로젝트 기획을 의뢰합니다. 단순 일회성 튜토리얼이 아니라 실질적인 지역 연계 취업 성과로 도출되는 임팩트 있는 프로젝트를 원합니다.',
-    submittedAt: '2026-07-01 14:32:00',
-    status: 'reviewing'
-  },
-  {
-    id: 'inq-2',
-    companyName: 'SK이노베이션 ESG추진그룹',
-    department: '사회공헌기획팀',
-    contactName: '김민준 책임',
-    email: 'mj.kim@sk.com',
-    phone: '02-2121-5678',
-    title: '소상공인 친환경 점포 AI 효율화 및 마케팅 지원 프로젝트 공동 운영 제안',
-    projectBudget: '5,000만원 이상',
-    targetAudience: '친환경 실천 소상공인 및 소기업 50개소',
-    description: 'SK이노베이션에서 추진하는 소셜 크리에이터 상생 사업의 일환으로, 친환경 실천 소상공인들을 위한 인프라 AI 진단 및 맞춤 홍보물 생성 지원 사업을 구상 중입니다. AIVEXA에서 기획 및 운영 실무를 전담하여 프로젝트 제안서를 준비해 주시면 좋겠습니다.',
-    submittedAt: '2026-07-02 10:15:00',
-    status: 'pending'
-  }
-];
+const INITIAL_INQUIRIES: Inquiry[] = [];
 
 function Breadcrumb({ currentPath }: { currentPath: string }) {
   const navigate = useNavigate();
   const pathNames: Record<string, string> = {
     '/about': '소개',
     '/services': '서비스',
-    '/projects': '프로젝트 영역',
-    '/partners': '협력 모델',
+    '/projects': '작업 예시',
+    '/partners': '외주 파트너십',
     '/faq': 'FAQ',
     '/contact': '프로젝트 문의',
   };
@@ -96,33 +67,37 @@ function AppContent() {
 
   // Dynamically update document title and description based on pathname
   useEffect(() => {
-    let title = 'AIVEXA - AI FOR PEOPLE & COMMUNITIES';
-    let description = '20년 이상의 글로벌 무역·해외영업 경험과 중국어 전문성을 바탕으로 공공기관, 기업과 협력하여 소상공인과 외국인을 위한 실전 프로젝트를 기획하고 운영합니다. AI는 목적이 아니라 더 큰 사회적 가치를 만드는 도구입니다.';
+    let title = 'AIVEXA | 중국어 문서·번역·시장조사·AI 비즈니스 지원';
+    let description = 'AIVEXA는 기업의 한중·중한 문서 번역, 중국 비즈니스 문장, 중국 업체·시장 기초조사, 해외영업 자료 및 기업 AI 활용을 비대면으로 지원합니다.';
 
     switch (pathname) {
       case '/about':
-        title = '소개 - AIVEXA';
-        description = '20년 이상의 글로벌 비즈니스 실무 경험을 가진 전문가가 사람을 위한 도구로서의 AI 프로젝트를 기획합니다.';
+        title = 'AIVEXA 소개 | 글로벌 비즈니스 실무 지원';
+        description = '20년 이상의 글로벌 무역·해외영업 경험을 바탕으로 기업의 문서, 번역, 조사, 해외업무와 AI 활용을 지원합니다.';
         break;
       case '/services':
-        title = '서비스 - AIVEXA';
-        description = '공공기관 협력, 기업 CSR/ESG, 소상공인 및 외국인 지원을 아우르는 실행 중심의 비즈니스 솔루션을 설계합니다.';
+        title = '서비스 | 중국어 번역·시장조사·해외영업 문서';
+        description = '기업문서 번역·검수, 중국 비즈니스 문장, 업체·시장 기초조사, 해외영업 문서와 기업 AI 활용을 지원합니다.';
         break;
       case '/projects':
-        title = '프로젝트 영역 - AIVEXA';
-        description = '공공과 민간의 소통과 협력을 이끄는 실제 프로젝트 포트폴리오 및 핵심 가치를 소개합니다.';
+        title = '작업 예시 | AIVEXA';
+        description = '한중·중한 번역, 중국 업체 기초조사표, 비즈니스 이메일과 AI 번역문 검수 샘플 유형을 안내합니다.';
         break;
       case '/partners':
-        title = '협력 모델 - AIVEXA';
-        description = '지자체, 공공기관 및 기업 실무 담당자의 높은 행정 프로세스 이해도를 바탕으로 한 지속 가능한 협력 파트너십.';
+        title = '외주 파트너십 | AIVEXA';
+        description = '명확한 범위와 일정, 비용을 기준으로 기업과 실무자를 비대면으로 지원하는 외주 협업 방식을 안내합니다.';
         break;
       case '/faq':
-        title = 'FAQ - AIVEXA';
-        description = 'AIVEXA 서비스, 프로젝트 협력 모델 및 문의 진행 방식에 대한 자주 묻는 질문을 확인하세요.';
+        title = '진행 절차·FAQ | AIVEXA';
+        description = '의뢰 가능 업무, 비용, 기간, 보안, 수정 범위와 중국 업체 기초조사의 한계를 안내합니다.';
         break;
       case '/contact':
-        title = '프로젝트 문의 - AIVEXA';
-        description = '성공적인 공공 및 기업 CSR 프로젝트 기획을 위한 맞춤형 제안서와 제안 내용을 문의하세요.';
+        title = '작업 문의 | AIVEXA';
+        description = '필요한 업무와 납기를 알려주시면 작업 가능 여부, 범위, 예상 납기와 비용을 안내합니다.';
+        break;
+      case '/privacy':
+        title = '개인정보처리방침 | AIVEXA';
+        description = 'AIVEXA 문의 과정에서 수집하는 개인정보의 항목, 이용 목적과 보유기간을 안내합니다.';
         break;
     }
 
@@ -201,11 +176,11 @@ function AppContent() {
         setInquiries(JSON.parse(savedInquiries));
       } catch (e) {
         console.error('Failed to parse saved inquiries, using seeded', e);
-        setInquiries(INITIAL_INQUIRIES);
+        setInquiries([]);
       }
     } else {
-      setInquiries(INITIAL_INQUIRIES);
-      localStorage.setItem('aivexa_inquiries', JSON.stringify(INITIAL_INQUIRIES));
+      setInquiries([]);
+      localStorage.setItem('aivexa_inquiries', '[]');
     }
   }, []);
 
@@ -299,6 +274,7 @@ function AppContent() {
       'projects': '/projects',
       'partnership': '/partners',
       'director': '/about',
+      'faq': '/faq',
       'inquiry': '/contact',
     };
 
@@ -340,7 +316,7 @@ function AppContent() {
     localStorage.setItem('aivexa_site_config_v4', JSON.stringify(updated));
   };
 
-  const isHome = pathname === '/' || pathname === '/index.html' || !['/about', '/services', '/projects', '/partners', '/faq', '/contact'].includes(pathname);
+  const isHome = pathname === '/' || pathname === '/index.html' || !['/about', '/services', '/projects', '/partners', '/faq', '/contact', '/privacy'].includes(pathname);
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800 antialiased" id="root-layout">
@@ -426,6 +402,7 @@ function AppContent() {
             />
           } 
         />
+        <Route path="/privacy" element={<PrivacyPage />} />
         {/* Fallback routing */}
         <Route 
           path="*" 

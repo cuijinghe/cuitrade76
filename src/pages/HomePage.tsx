@@ -58,6 +58,38 @@ export default function HomePage({
         onNavigate={onNavigate}
       />
 
+      <section className="bg-slate-50 py-20" id="work-process">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+          <div className="grid gap-12 lg:grid-cols-2">
+            <div className="text-left">
+              <p className="text-xs font-bold tracking-widest text-brand-blue">WORK PRINCIPLES</p>
+              <h2 className="mt-3 font-display text-3xl font-extrabold text-brand-navy">명확한 범위와 납기를 기준으로 진행합니다</h2>
+              <ul className="mt-8 grid gap-3 text-sm text-slate-600 sm:grid-cols-2">
+                {['비대면 진행', '작업 전 범위·일정·비용 확인', '소량·단기 작업 가능', '보안자료 취급방식 협의', '납품 전 기본 검수', '추가 요청은 별도 협의'].map((item) => <li key={item} className="rounded-xl border border-slate-200 bg-white px-4 py-3">{item}</li>)}
+              </ul>
+            </div>
+            <div className="text-left">
+              <p className="text-xs font-bold tracking-widest text-brand-blue">PROCESS</p>
+              <h2 className="mt-3 font-display text-3xl font-extrabold text-brand-navy">진행 절차</h2>
+              <ol className="mt-8 space-y-3 text-sm text-slate-600">
+                {['문의 접수', '자료 및 작업범위 확인', '견적·납기 안내', '결제 또는 착수금 확인', '작업 및 검수', '온라인 납품', '사전 합의 범위 내 수정'].map((item, index) => <li key={item} className="flex items-center gap-3"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-navy text-xs font-bold text-white">{index + 1}</span>{item}</li>)}
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-20" id="work-samples">
+        <div className="mx-auto max-w-7xl px-6 text-center sm:px-8 lg:px-12">
+          <p className="text-xs font-bold tracking-widest text-brand-blue">WORK SAMPLES</p>
+          <h2 className="mt-3 font-display text-3xl font-extrabold text-brand-navy">작업 예시</h2>
+          <p className="mt-4 text-sm text-slate-500">작업 예시 준비 중입니다. 실제 기업명, 개인정보와 영업비밀이 포함되지 않은 샘플부터 순차적으로 공개합니다.</p>
+          <div className="mt-8 grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-5">
+            {['한→중 제품소개 문서', '중→한 기업자료 번역', '중국 업체 기초조사표', '중국 비즈니스 이메일', 'AI 번역문 수정 전·후'].map((item) => <div key={item} className="rounded-2xl border border-slate-100 bg-slate-50 p-5 text-sm font-bold text-brand-navy">{item}</div>)}
+          </div>
+        </div>
+      </section>
+
       {/* Partnership Model section */}
       <Partnership
         title={config.partnership.title}
@@ -71,6 +103,13 @@ export default function HomePage({
         isAdminMode={isAdminMode}
         onEditImage={(currentUrl) => onOpenImageSelector('director', currentUrl || config.director.imageUrl, '디렉터 프로필 이미지')}
       />
+
+      <section className="border-y border-slate-100 bg-slate-50 py-12">
+        <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-5 px-6 text-left sm:flex-row sm:items-center">
+          <div><h2 className="font-display text-xl font-extrabold text-brand-navy">AI 실전 중국어 콘텐츠</h2><p className="mt-2 text-sm text-slate-500">AI를 활용한 실전 중국어 전자책과 비즈니스 중국어 콘텐츠도 제작합니다.</p></div>
+          <a href="https://book.aivexa.co.kr" target="_blank" rel="noreferrer" className="rounded-full border border-brand-navy px-5 py-2.5 text-xs font-bold text-brand-navy hover:bg-brand-navy hover:text-white">전자책 보기</a>
+        </div>
+      </section>
 
       {/* Proposal Inquiry Form */}
       <InquiryForm

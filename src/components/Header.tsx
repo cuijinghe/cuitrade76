@@ -13,10 +13,10 @@ interface HeaderProps {
 export default function Header({ onAdminToggle, isAdminMode, onNavigate, activeSection, currentPath, onLogoClick }: HeaderProps) {
   const menuItems = [
     { id: 'services', label: '서비스' },
-    { id: 'projects', label: '프로젝트 영역' },
-    { id: 'partnership', label: '협력 모델' },
-    { id: 'director', label: '소개' },
-    { id: 'inquiry', label: '프로젝트 문의' },
+    { id: 'projects', label: '작업 예시' },
+    { id: 'director', label: 'AIVEXA 소개' },
+    { id: 'faq', label: '진행 절차·FAQ' },
+    { id: 'inquiry', label: '문의' },
   ];
 
   const pathToSection: Record<string, string> = {
@@ -25,6 +25,7 @@ export default function Header({ onAdminToggle, isAdminMode, onNavigate, activeS
     '/services': 'services',
     '/projects': 'projects',
     '/partners': 'partnership',
+    '/faq': 'faq',
     '/contact': 'inquiry',
   };
 
@@ -110,7 +111,7 @@ export default function Header({ onAdminToggle, isAdminMode, onNavigate, activeS
             className="hidden sm:block rounded-full bg-brand-navy px-5 py-2.5 font-display text-xs font-semibold text-white transition-all hover:bg-brand-blue hover:shadow-lg hover:shadow-brand-blue/15 cursor-pointer"
             id="cta-inquiry-nav"
           >
-            프로젝트 문의
+            작업 문의
           </button>
         </div>
       </div>
