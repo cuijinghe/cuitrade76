@@ -18,6 +18,8 @@ import FAQPage from './pages/FAQPage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPage from './pages/PrivacyPage';
 import PricingPage from './pages/PricingPage';
+import LoginPage from './pages/LoginPage';
+import AccountPage from './pages/AccountPage';
 
 const INITIAL_INQUIRIES: Inquiry[] = [];
 
@@ -342,7 +344,7 @@ function AppContent() {
     localStorage.setItem('aivexa_site_config_v5', JSON.stringify(updated));
   };
 
-  const isHome = pathname === '/' || pathname === '/index.html' || !['/about', '/services', '/pricing', '/projects', '/partners', '/faq', '/contact', '/privacy'].includes(pathname);
+  const isHome = pathname === '/' || pathname === '/index.html' || !['/about', '/services', '/pricing', '/projects', '/partners', '/faq', '/contact', '/privacy', '/login', '/account'].includes(pathname);
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800 antialiased" id="root-layout">
@@ -430,6 +432,9 @@ function AppContent() {
         />
         <Route path="/pricing" element={<PricingPage onNavigate={handleNavigate} />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<LoginPage />} />
+        <Route path="/account" element={<AccountPage />} />
         {/* Fallback routing */}
         <Route 
           path="*" 
