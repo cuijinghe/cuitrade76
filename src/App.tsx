@@ -147,7 +147,7 @@ function AppContent() {
 
   // Load state from localStorage on init
   useEffect(() => {
-    const savedConfig = localStorage.getItem('aivexa_site_config_v3') || localStorage.getItem('aivexa_site_config_v4');
+    const savedConfig = localStorage.getItem('aivexa_site_config_v5');
     if (savedConfig) {
       try {
         const parsed = JSON.parse(savedConfig);
@@ -185,14 +185,14 @@ function AppContent() {
         }
 
         setConfig(parsed);
-        localStorage.setItem('aivexa_site_config_v4', JSON.stringify(parsed));
+        localStorage.setItem('aivexa_site_config_v5', JSON.stringify(parsed));
       } catch (e) {
         console.error('Failed to parse saved config, using default', e);
         setConfig(DEFAULT_SITE_CONFIG);
       }
     } else {
       setConfig(DEFAULT_SITE_CONFIG);
-      localStorage.setItem('aivexa_site_config_v4', JSON.stringify(DEFAULT_SITE_CONFIG));
+      localStorage.setItem('aivexa_site_config_v5', JSON.stringify(DEFAULT_SITE_CONFIG));
     }
 
     const savedInquiries = localStorage.getItem('aivexa_inquiries');
@@ -235,7 +235,7 @@ function AppContent() {
   // Update configuration
   const handleUpdateConfig = (newConfig: SiteConfig) => {
     setConfig(newConfig);
-    localStorage.setItem('aivexa_site_config_v4', JSON.stringify(newConfig));
+    localStorage.setItem('aivexa_site_config_v5', JSON.stringify(newConfig));
   };
 
   // Submit Inquiry
@@ -275,7 +275,7 @@ function AppContent() {
   const handleResetToDefault = () => {
     if (confirm('홈페이지 설정과 텍스트, 이미지 경로를 최초 기본값으로 리셋하시겠습니까?')) {
       setConfig(DEFAULT_SITE_CONFIG);
-      localStorage.setItem('aivexa_site_config_v4', JSON.stringify(DEFAULT_SITE_CONFIG));
+      localStorage.setItem('aivexa_site_config_v5', JSON.stringify(DEFAULT_SITE_CONFIG));
       
       setInquiries(INITIAL_INQUIRIES);
       localStorage.setItem('aivexa_inquiries', JSON.stringify(INITIAL_INQUIRIES));
@@ -339,7 +339,7 @@ function AppContent() {
       });
     }
     setConfig(updated);
-    localStorage.setItem('aivexa_site_config_v4', JSON.stringify(updated));
+    localStorage.setItem('aivexa_site_config_v5', JSON.stringify(updated));
   };
 
   const isHome = pathname === '/' || pathname === '/index.html' || !['/about', '/services', '/pricing', '/projects', '/partners', '/faq', '/contact', '/privacy'].includes(pathname);
