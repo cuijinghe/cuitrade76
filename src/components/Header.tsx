@@ -88,6 +88,14 @@ export default function Header({ onAdminToggle, isAdminMode, onNavigate, activeS
               {item.label}
             </button>
           ))}
+          <a
+            href="https://book.aivexa.co.kr"
+            target="_blank"
+            rel="noreferrer"
+            className="font-display text-sm font-medium text-slate-600 transition-colors duration-200 hover:text-brand-navy"
+          >
+            전자책
+          </a>
         </nav>
 
         {/* Right CTA and Admin Mode toggler */}
