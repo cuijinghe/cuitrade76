@@ -17,7 +17,8 @@ const supportAreas = [
   { icon: Workflow, label: 'AI 업무 활용 지원' },
 ];
 
-export default function Hero({ onNavigate }: HeroProps) {
+export default function Hero({ config, onNavigate }: HeroProps) {
+  const [headline, accent] = config.title.split('\n');
   return (
     <section className="relative overflow-hidden bg-[#081229] text-white" id="hero">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(46,92,255,0.22),transparent_34%),linear-gradient(135deg,transparent_0%,rgba(255,255,255,0.025)_48%,transparent_100%)]" />
@@ -31,7 +32,7 @@ export default function Hero({ onNavigate }: HeroProps) {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-3 border-l-2 border-[#4263ff] pl-4 text-xs font-bold tracking-[0.22em] text-blue-200"
           >
-            AIVEXA · AI BUSINESS & GLOBAL SUPPORT
+            AIVEXA · {config.slogan}
           </motion.div>
 
           <motion.h1
@@ -41,8 +42,8 @@ export default function Hero({ onNavigate }: HeroProps) {
             className="mt-7 max-w-4xl font-display text-[2.35rem] font-extrabold leading-[1.2] tracking-[-0.035em] text-white sm:text-5xl lg:text-[3.8rem]"
             id="hero-heading"
           >
-            기업의 AI·문서·글로벌 업무를
-            <span className="mt-2 block text-blue-300">지원합니다.</span>
+            {headline}
+            {accent && <span className="mt-2 block text-blue-300">{accent}</span>}
           </motion.h1>
 
           <motion.p
@@ -52,8 +53,7 @@ export default function Hero({ onNavigate }: HeroProps) {
             className="mt-6 max-w-2xl text-[0.95rem] leading-7 text-slate-300 sm:text-lg sm:leading-8"
             id="hero-subtitle"
           >
-            AIVEXA는 기업문서 작성, 한중·중한 번역, 중국 업체·시장 기초조사, 해외영업 자료 및 기업 AI 활용을 비대면으로 지원합니다.
-            필요한 업무와 납기를 확인한 후 작업 범위와 비용을 명확히 안내합니다. 소량·단기 프로젝트부터 협업할 수 있습니다.
+            {config.subtitle}
           </motion.p>
 
           <motion.div

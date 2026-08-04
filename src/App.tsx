@@ -69,8 +69,8 @@ function AppContent() {
 
   // Dynamically update document title and description based on pathname
   useEffect(() => {
-    let title = 'AIVEXA | 중국어 문서·번역·시장조사·AI 비즈니스 지원';
-    let description = 'AIVEXA는 기업의 한중·중한 문서 번역, 중국 비즈니스 문장, 중국 업체·시장 기초조사, 해외영업 자료 및 기업 AI 활용을 비대면으로 지원합니다.';
+    let title = 'AIVEXA | 중국어 번역·시장조사·해외영업 문서·기업 AI 지원';
+    let description = 'AIVEXA는 한중·중한 번역, AI 번역 검수, 중국 업체·시장 기초조사, 해외영업 문서 및 기업 AI 교육을 비대면으로 지원합니다.';
 
     switch (pathname) {
       case '/about':
@@ -117,6 +117,19 @@ function AppContent() {
       meta.content = description;
       document.head.appendChild(meta);
     }
+
+    const canonicalUrl = `https://aivexa.co.kr${pathname === '/' ? '/' : pathname}`;
+    const canonical = document.querySelector('link[rel="canonical"]');
+    canonical?.setAttribute('href', canonicalUrl);
+
+    const setMetaContent = (selector: string, content: string) => {
+      document.querySelector(selector)?.setAttribute('content', content);
+    };
+    setMetaContent('meta[property="og:url"]', canonicalUrl);
+    setMetaContent('meta[property="og:title"]', title);
+    setMetaContent('meta[property="og:description"]', description);
+    setMetaContent('meta[name="twitter:title"]', title);
+    setMetaContent('meta[name="twitter:description"]', description);
   }, [pathname]);
 
   // Direct Image selector state
@@ -138,6 +151,12 @@ function AppContent() {
     if (savedConfig) {
       try {
         const parsed = JSON.parse(savedConfig);
+
+        // Migrate the previous default hero copy while preserving user-authored custom text.
+        if (parsed.hero?.title?.includes('기업의 AI·문서·글로벌 업무를')) {
+          parsed.hero.title = DEFAULT_SITE_CONFIG.hero.title;
+          parsed.hero.subtitle = DEFAULT_SITE_CONFIG.hero.subtitle;
+        }
         
         // Ensure they use our updated default local assets with intelligent CDN failover
         const isOldDefaultHero = parsed.hero?.imageUrl?.includes('photo-1557804506-669a67965ba0') || parsed.hero?.imageUrl?.includes('photo-1519085360753-af0119f7cbe7') || parsed.hero?.imageUrl?.includes('photo-1573496799652-408c2ac9fe98');

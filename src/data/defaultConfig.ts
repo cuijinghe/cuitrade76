@@ -3,8 +3,8 @@ import { SiteConfig } from '../types';
 export const DEFAULT_SITE_CONFIG: SiteConfig = {
   hero: {
     slogan: 'AI BUSINESS & GLOBAL SUPPORT',
-    title: '기업의 AI·문서·글로벌 업무를\n지원합니다',
-    subtitle: 'AIVEXA는 기업 문서, 한중·중한 번역, 중국 시장 기초조사, 해외영업 자료와 AI 활용 업무를 비대면으로 지원합니다. 필요한 업무와 납기를 확인한 후 작업 범위와 비용을 명확히 안내하며, 소량·단기 프로젝트부터 협업할 수 있습니다.',
+    title: '20년 무역·해외영업 경험으로\n기업 문서·번역·중국 조사를 지원합니다',
+    subtitle: '한중·중한 번역, 중국 업체·시장 기초조사, 해외영업 자료, 기업 AI 활용까지 비대면으로 지원합니다. 업무 범위를 먼저 확인한 뒤 일정과 비용을 안내하며, 소량·단기 프로젝트도 가능합니다.',
     imageUrl: '/hero.jpg',
     imageTagline: 'AIVEXA BUSINESS SUPPORT',
     imageSubTagline: '문서·번역·조사·해외업무·AI 활용 지원'

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -76,6 +76,23 @@ export default function FAQ() {
       answer: '네. 기존 기업·공공기관 AI 교육은 서비스의 한 분야로 계속 운영합니다.'
     }
   ];
+
+  useEffect(() => {
+    const schema = document.createElement('script');
+    schema.id = 'faq-structured-data';
+    schema.type = 'application/ld+json';
+    schema.text = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: { '@type': 'Answer', text: item.answer },
+      })),
+    });
+    document.head.appendChild(schema);
+    return () => schema.remove();
+  }, []);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
