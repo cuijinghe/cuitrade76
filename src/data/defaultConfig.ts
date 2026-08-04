@@ -60,7 +60,7 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
     title: 'Project Director',
     role: 'Project Director',
     name: 'AIVEXA Director',
-    experience: 'AIVEXA는 AI 활용과 글로벌 비즈니스 실무를 결합하여 기업과 기관의 문서, 번역, 조사, 해외업무 및 교육을 지원합니다. 20년 이상의 글로벌 무역·해외영업과 한중일 비즈니스 커뮤니케이션 경험을 바탕으로 책임 범위 안에서 실무 업무를 지원하는 외주 파트너입니다.',
+    experience: 'AIVEXA는 AI 활용과 글로벌 비즈니스 실무를 결합하여 기업과 기관의 문서, 번역, 조사 및 해외업무를 지원합니다. 20년 이상의 글로벌 무역·해외영업과 한중일 비즈니스 커뮤니케이션 경험을 바탕으로 책임 범위 안에서 실무 업무를 지원하는 외주 파트너입니다.',
     expertise: 'AI Business & Global Support',
     focusArea: '문서·번역·조사·해외업무 실무 지원',
     imageUrl: '/director.jpg'

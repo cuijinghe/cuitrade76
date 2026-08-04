@@ -305,7 +305,6 @@ export default function InquiryForm({ onSubmitInquiry }: InquiryFormProps) {
                         <option value="중국 업체 기초조사">중국 업체 기초조사</option>
                         <option value="중국 시장조사">중국 시장조사</option>
                         <option value="해외영업 문서 지원">해외영업 문서 지원</option>
-                        <option value="기업 AI 교육">기업 AI 교육</option>
                         <option value="맞춤형 프로젝트">맞춤형 프로젝트</option>
                         <option value="기타">기타</option>
                       </select>

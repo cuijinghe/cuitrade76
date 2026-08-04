@@ -51,7 +51,7 @@ export default function HomePage({
       {/* Services and Projects */}
       <Services
         title={config.services.title}
-        items={config.services.items}
+        items={config.services.items.filter((item) => item.id !== 'service-5')}
         isAdminMode={isAdminMode}
         onEditItem={(itemId, currentUrl, title) => onOpenImageSelector(itemId, currentUrl, title)}
         onNavigate={onNavigate}

@@ -13,7 +13,7 @@ export default function FAQ() {
   const faqItems: FAQItem[] = [
     {
       question: '어떤 업무를 의뢰할 수 있나요?',
-      answer: '기업문서 한중·중한 번역과 검수, 중국 비즈니스 문장 작성, 중국 업체·시장 공개자료 기초조사, 해외영업 문서, 기업 AI 활용과 교육을 의뢰할 수 있습니다.'
+      answer: '기업문서 한중·중한 번역과 검수, 중국 비즈니스 문장 작성, 중국 업체·시장 공개자료 기초조사와 해외영업 문서를 의뢰할 수 있습니다.'
     },
     {
       question: '소량 또는 단기 작업도 가능한가요?',
@@ -77,6 +77,8 @@ export default function FAQ() {
     }
   ];
 
+  const visibleFaqItems = faqItems.filter((item) => !item.question.includes('기업 AI 교육'));
+
   useEffect(() => {
     const schema = document.createElement('script');
     schema.id = 'faq-structured-data';
@@ -84,7 +86,7 @@ export default function FAQ() {
     schema.text = JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
-      mainEntity: faqItems.map((item) => ({
+      mainEntity: visibleFaqItems.map((item) => ({
         '@type': 'Question',
         name: item.question,
         acceptedAnswer: { '@type': 'Answer', text: item.answer },
@@ -116,7 +118,7 @@ export default function FAQ() {
 
         {/* Accordion list */}
         <div className="space-y-4">
-          {faqItems.map((item, index) => {
+          {visibleFaqItems.map((item, index) => {
             const isOpen = openIndex === index;
             return (
               <div 
