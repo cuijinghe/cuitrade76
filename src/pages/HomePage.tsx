@@ -31,22 +31,22 @@ export default function HomePage({
         isAdminMode={isAdminMode}
         onEditImage={(currentUrl) => onOpenImageSelector('hero', currentUrl || config.hero.imageUrl, '메인 히어로 이미지')}
       />
-      {/* Trust Bar */}
-      <section className="border-y border-slate-100 bg-white py-8">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-6 sm:px-8 lg:grid-cols-4 lg:px-12">
+      {/* Evidence-safe trust strip */}
+      <section className="border-b border-slate-200 bg-white">
+        <div className="mx-auto grid max-w-7xl divide-y divide-slate-200 px-6 sm:grid-cols-2 sm:divide-x sm:divide-y-0 sm:px-8 lg:grid-cols-4 lg:px-12">
           {[
-            ['20년+', '글로벌 비즈니스 경험'],
-            ['여성기업', '공공기관 협력 가능'],
-            ['AI', '실무 프로젝트 기획'],
-            ['중국어', '전문 통번역·교육'],
+            ['20년+ 실무 경험', '글로벌 무역·해외영업 기반'],
+            ['한중 업무 전문성', '문서·번역·거래 커뮤니케이션'],
+            ['기업·기관 대응', '요청 목적과 납품 기준 중심'],
+            ['명확한 진행 기준', '범위·일정·비용 사전 안내'],
           ].map(([label, desc]) => (
-            <div key={label} className="rounded-2xl border border-slate-100 bg-slate-50/60 px-5 py-5 text-center">
-              <p className="font-display text-xl font-extrabold text-brand-navy">{label}</p>
-              <p className="mt-2 text-xs font-medium text-slate-500">{desc}</p>
+            <div key={label} className="px-5 py-7 text-left first:pl-0 last:pr-0 sm:px-6">
+              <p className="font-display text-sm font-extrabold text-brand-navy">{label}</p>
+              <p className="mt-2 text-xs leading-5 text-slate-500">{desc}</p>
             </div>
           ))}
         </div>
-       </section>
+      </section>
 
 
       {/* Services and Projects */}
