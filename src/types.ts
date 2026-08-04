@@ -15,6 +15,11 @@ export interface Inquiry {
   title: string;
   projectBudget: string;
   targetAudience: string;
+  sourceLanguage?: string;
+  targetLanguage?: string;
+  companyCount?: string;
+  fileFormat?: string;
+  attachmentName?: string;
   deadline?: string;
   referenceLink?: string;
   description: string;

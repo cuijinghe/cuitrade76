@@ -17,6 +17,7 @@ import PartnersPage from './pages/PartnersPage';
 import FAQPage from './pages/FAQPage';
 import ContactPage from './pages/ContactPage';
 import PrivacyPage from './pages/PrivacyPage';
+import PricingPage from './pages/PricingPage';
 
 const INITIAL_INQUIRIES: Inquiry[] = [];
 
@@ -25,6 +26,7 @@ function Breadcrumb({ currentPath }: { currentPath: string }) {
   const pathNames: Record<string, string> = {
     '/about': '소개',
     '/services': '서비스',
+    '/pricing': '서비스 가격·견적',
     '/projects': '작업 예시',
     '/partners': '외주 파트너십',
     '/faq': 'FAQ',
@@ -94,6 +96,10 @@ function AppContent() {
       case '/contact':
         title = '작업 문의 | AIVEXA';
         description = '필요한 업무와 납기를 알려주시면 작업 가능 여부, 범위, 예상 납기와 비용을 안내합니다.';
+        break;
+      case '/pricing':
+        title = 'AIVEXA 서비스 가격 | 중국어 번역·시장조사·해외영업 문서·AI 교육';
+        description = 'AIVEXA의 한중·중한 번역, AI 번역 검수, 중국 업체·시장조사, 해외영업 문서 지원 및 기업 AI 교육의 시작가격과 견적 기준을 확인하세요.';
         break;
       case '/privacy':
         title = '개인정보처리방침 | AIVEXA';
@@ -271,6 +277,7 @@ function AppContent() {
     const sectionToPath: Record<string, string> = {
       'hero': '/',
       'services': '/services',
+      'pricing': '/pricing',
       'projects': '/projects',
       'partnership': '/partners',
       'director': '/about',
@@ -316,7 +323,7 @@ function AppContent() {
     localStorage.setItem('aivexa_site_config_v4', JSON.stringify(updated));
   };
 
-  const isHome = pathname === '/' || pathname === '/index.html' || !['/about', '/services', '/projects', '/partners', '/faq', '/contact', '/privacy'].includes(pathname);
+  const isHome = pathname === '/' || pathname === '/index.html' || !['/about', '/services', '/pricing', '/projects', '/partners', '/faq', '/contact', '/privacy'].includes(pathname);
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800 antialiased" id="root-layout">
@@ -402,6 +409,7 @@ function AppContent() {
             />
           } 
         />
+        <Route path="/pricing" element={<PricingPage onNavigate={handleNavigate} />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         {/* Fallback routing */}
         <Route 

@@ -1,6 +1,7 @@
 import React from 'react';
 import Services from '../components/Services';
 import { SiteConfig } from '../types';
+import Pricing from '../components/Pricing';
 
 interface ServicesPageProps {
   config: SiteConfig;
@@ -24,6 +25,7 @@ export default function ServicesPage({
         onEditItem={(itemId, currentUrl, title) => onOpenImageSelector(itemId, currentUrl, title)}
         onNavigate={onNavigate}
       />
+      <Pricing onNavigate={onNavigate} detailed />
       <section className="border-t border-slate-100 bg-slate-50 py-16">
         <div className="mx-auto max-w-5xl px-6 text-left">
           <h2 className="font-display text-2xl font-extrabold text-brand-navy">서비스 공통 안내</h2>

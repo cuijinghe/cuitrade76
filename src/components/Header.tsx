@@ -14,6 +14,7 @@ export default function Header({ onNavigate, activeSection, currentPath, onLogoC
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuItems = [
     { id: 'services', label: '서비스' },
+    { id: 'pricing', label: '가격·견적' },
     { id: 'projects', label: '작업 예시' },
     { id: 'director', label: 'AIVEXA 소개' },
     { id: 'faq', label: '진행 절차·FAQ' },
@@ -24,6 +25,7 @@ export default function Header({ onNavigate, activeSection, currentPath, onLogoC
     '/': activeSection,
     '/about': 'director',
     '/services': 'services',
+    '/pricing': 'pricing',
     '/projects': 'projects',
     '/partners': 'partnership',
     '/faq': 'faq',

@@ -17,6 +17,10 @@ export default function InquiryForm({ onSubmitInquiry }: InquiryFormProps) {
     title: '',
     projectBudget: '',
     targetAudience: '',
+    sourceLanguage: '',
+    targetLanguage: '',
+    companyCount: '',
+    fileFormat: '',
     deadline: '',
     referenceLink: '',
     description: '',
@@ -27,6 +31,7 @@ export default function InquiryForm({ onSubmitInquiry }: InquiryFormProps) {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submittedService, setSubmittedService] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [attachment, setAttachment] = useState<File | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -51,26 +56,27 @@ export default function InquiryForm({ onSubmitInquiry }: InquiryFormProps) {
     setIsSubmitting(true);
 
     try {
+      const payload = new FormData();
+      Object.entries(formData).forEach(([key, value]) => payload.append(key, String(value)));
+      payload.append('service', formData.title);
+      payload.append('volume', formData.targetAudience);
+      payload.append('budget', formData.projectBudget);
+      payload.append('_subject', `[AIVEXA 작업 문의] ${formData.title}`);
+      if (attachment) payload.append('attachment', attachment);
+
       const response = await fetch('https://formspree.io/f/xaqrrrrk', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          service: formData.title,
-          volume: formData.targetAudience,
-          budget: formData.projectBudget,
-          _subject: `[AIVEXA 작업 문의] ${formData.title}`,
-        }),
+        body: payload,
       });
 
       if (!response.ok) {
         throw new Error('문의 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.');
       }
 
-      onSubmitInquiry(formData);
+      onSubmitInquiry({ ...formData, attachmentName: attachment?.name });
       setSubmittedService(formData.title);
       setSubmitSuccess(true);
       
@@ -84,10 +90,15 @@ export default function InquiryForm({ onSubmitInquiry }: InquiryFormProps) {
         title: '',
         projectBudget: '',
       targetAudience: '',
+      sourceLanguage: '',
+      targetLanguage: '',
+      companyCount: '',
+      fileFormat: '',
       deadline: '',
       referenceLink: '',
       description: '',
       });
+      setAttachment(null);
       setAgreed(false);
     } catch (error) {
       setErrorMessage(error instanceof Error ? error.message : '문의 전송에 실패했습니다.');
@@ -254,11 +265,12 @@ export default function InquiryForm({ onSubmitInquiry }: InquiryFormProps) {
                         className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-brand-blue focus:outline-hidden focus:ring-1 focus:ring-brand-blue"
                       >
                         <option value="">선택해 주세요</option>
-                        <option value="10만원 미만">10만원 미만</option>
-                        <option value="10만원 ~ 30만원">10만원 ~ 30만원</option>
-                        <option value="30만원 ~ 100만원">30만원 ~ 100만원</option>
-                        <option value="100만원 이상">100만원 이상</option>
-                        <option value="협의 가능 / 미정">협의 가능 / 미정</option>
+                        <option value="50,000원 미만">50,000원 미만</option>
+                        <option value="50,000원~100,000원">50,000원~100,000원</option>
+                        <option value="100,000원~300,000원">100,000원~300,000원</option>
+                        <option value="300,000원~500,000원">300,000원~500,000원</option>
+                        <option value="500,000원 이상">500,000원 이상</option>
+                        <option value="협의 필요">협의 필요</option>
                       </select>
                     </div>
                   </div>
@@ -286,11 +298,15 @@ export default function InquiryForm({ onSubmitInquiry }: InquiryFormProps) {
                         className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-brand-blue focus:outline-hidden focus:ring-1 focus:ring-brand-blue"
                       >
                         <option value="">선택해 주세요</option>
-                        <option value="기업문서 번역·검수">기업문서 번역·검수</option>
-                        <option value="중국 비즈니스 문장">중국 비즈니스 문장</option>
-                        <option value="중국 업체·시장 기초조사">중국 업체·시장 기초조사</option>
+                        <option value="기업문서 작성·교정">기업문서 작성·교정</option>
+                        <option value="한중 번역">한중 번역</option>
+                        <option value="중한 번역">중한 번역</option>
+                        <option value="AI 번역문 검수">AI 번역문 검수</option>
+                        <option value="중국 업체 기초조사">중국 업체 기초조사</option>
+                        <option value="중국 시장조사">중국 시장조사</option>
                         <option value="해외영업 문서 지원">해외영업 문서 지원</option>
-                        <option value="기업 AI 활용·교육">기업 AI 활용·교육</option>
+                        <option value="기업 AI 교육">기업 AI 교육</option>
+                        <option value="맞춤형 프로젝트">맞춤형 프로젝트</option>
                         <option value="기타">기타</option>
                       </select>
                     </div>
@@ -298,7 +314,7 @@ export default function InquiryForm({ onSubmitInquiry }: InquiryFormProps) {
                     {/* Target Audience */}
                     <div className="text-left">
                       <label htmlFor="targetAudience" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                        예상 분량 (선택)
+                        예상 글자 수 또는 페이지 수 (선택)
                       </label>
                       <input
                         type="text"
@@ -324,6 +340,13 @@ export default function InquiryForm({ onSubmitInquiry }: InquiryFormProps) {
                       </div>
                     </div>
 
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                      <div className="text-left"><label htmlFor="sourceLanguage" className="mb-2 block text-xs font-bold text-slate-700">원문 언어 (선택)</label><input type="text" name="sourceLanguage" id="sourceLanguage" value={formData.sourceLanguage} onChange={handleInputChange} placeholder="예: 한국어" className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-brand-blue focus:outline-hidden" /></div>
+                      <div className="text-left"><label htmlFor="targetLanguage" className="mb-2 block text-xs font-bold text-slate-700">번역 대상 언어 (선택)</label><input type="text" name="targetLanguage" id="targetLanguage" value={formData.targetLanguage} onChange={handleInputChange} placeholder="예: 중국어 간체" className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-brand-blue focus:outline-hidden" /></div>
+                      <div className="text-left"><label htmlFor="companyCount" className="mb-2 block text-xs font-bold text-slate-700">조사 업체 수 (선택)</label><input type="text" name="companyCount" id="companyCount" value={formData.companyCount} onChange={handleInputChange} placeholder="예: 10곳" className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-brand-blue focus:outline-hidden" /></div>
+                      <div className="text-left"><label htmlFor="fileFormat" className="mb-2 block text-xs font-bold text-slate-700">파일 형식 (선택)</label><input type="text" name="fileFormat" id="fileFormat" value={formData.fileFormat} onChange={handleInputChange} placeholder="예: Word, PDF, PPT" className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-brand-blue focus:outline-hidden" /></div>
+                    </div>
+
                     {/* Detailed Content */}
                     <div className="text-left">
                       <label htmlFor="description" className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
@@ -340,6 +363,7 @@ export default function InquiryForm({ onSubmitInquiry }: InquiryFormProps) {
                         className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-brand-blue focus:outline-hidden focus:ring-1 focus:ring-brand-blue"
                       />
                     </div>
+                    <div className="text-left"><label htmlFor="attachment" className="mb-2 block text-xs font-bold text-slate-700">파일 첨부 (선택)</label><input type="file" name="attachment" id="attachment" onChange={(e) => setAttachment(e.target.files?.[0] || null)} className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-600 file:mr-4 file:rounded-full file:border-0 file:bg-slate-100 file:px-4 file:py-2 file:text-xs file:font-bold" /><p className="mt-2 text-xs leading-5 text-rose-600">기밀자료나 민감한 정보는 1차 문의 시 업로드하지 마세요.</p></div>
                   </div>
                 </div>
 
