@@ -97,25 +97,24 @@ export default function InquiryForm({ onSubmitInquiry }: InquiryFormProps) {
   };
 
   return (
-    <section className="bg-white py-20 sm:py-28 border-t border-slate-100" id="inquiry">
-      <div className="mx-auto max-w-4xl px-6 sm:px-8">
+    <section className="border-t border-slate-200 bg-[#f6f7fa] py-24 sm:py-32" id="inquiry">
+      <div className="mx-auto max-w-5xl px-6 sm:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 rounded-full bg-slate-50 border border-slate-100 px-4 py-1.5 text-xs font-bold tracking-widest text-slate-800 uppercase mb-4">
-            PROJECT INQUIRY
-          </div>
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl">
-            작업 문의
+        <div className="mb-14 grid gap-6 text-left lg:grid-cols-2 lg:items-end">
+          <div>
+            <p className="text-xs font-bold tracking-[0.22em] text-brand-blue">PROJECT INQUIRY</p>
+            <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl">
+            필요한 업무를<br />먼저 정확히 알려주세요.
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-slate-500 max-w-2xl mx-auto break-keep">
-            필요한 업무와 납기를 알려주시면 자료 확인 후 작업 가능 여부, 범위와 비용을 안내합니다.<br />
-            민감하거나 기밀인 자료는 1차 문의에 첨부하거나 입력하지 마세요.
+          </div>
+          <p className="max-w-xl text-sm leading-7 text-slate-500 lg:justify-self-end">
+            필요한 업무와 납기를 알려주시면 자료 확인 후 작업 가능 여부, 범위와 비용을 안내합니다. 민감하거나 기밀인 자료는 1차 문의에 첨부하거나 입력하지 마세요.
           </p>
         </div>
 
         {/* Form Area */}
-        <div className="rounded-3xl border border-slate-100 bg-slate-50/20 p-8 sm:p-12 shadow-sm relative">
+        <div className="relative rounded-[2rem] border border-slate-200 bg-white p-8 shadow-2xl shadow-slate-900/5 sm:p-12">
           
           <AnimatePresence mode="wait">
             {submitSuccess ? (

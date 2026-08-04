@@ -5,7 +5,6 @@ import Partnership from '../components/Partnership';
 import Director from '../components/Director';
 import InquiryForm from '../components/InquiryForm';
 import { SiteConfig, Inquiry } from '../types';
-import { ChevronRight } from 'lucide-react';
 
 interface HomePageProps {
   config: SiteConfig;
@@ -58,34 +57,60 @@ export default function HomePage({
         onNavigate={onNavigate}
       />
 
-      <section className="bg-slate-50 py-20" id="work-process">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-          <div className="grid gap-12 lg:grid-cols-2">
-            <div className="text-left">
-              <p className="text-xs font-bold tracking-widest text-brand-blue">WORK PRINCIPLES</p>
-              <h2 className="mt-3 font-display text-3xl font-extrabold text-brand-navy">명확한 범위와 납기를 기준으로 진행합니다</h2>
-              <ul className="mt-8 grid gap-3 text-sm text-slate-600 sm:grid-cols-2">
-                {['비대면 진행', '작업 전 범위·일정·비용 확인', '소량·단기 작업 가능', '보안자료 취급방식 협의', '납품 전 기본 검수', '추가 요청은 별도 협의'].map((item) => <li key={item} className="rounded-xl border border-slate-200 bg-white px-4 py-3">{item}</li>)}
-              </ul>
+      <section className="relative overflow-hidden bg-[#081229] py-24 text-white sm:py-32" id="work-process">
+        <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
+        <div className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="text-left lg:col-span-5">
+              <p className="text-xs font-bold tracking-[0.22em] text-blue-300">WORK STANDARD</p>
+              <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight sm:text-4xl">좋은 결과는<br />명확한 기준에서 시작됩니다.</h2>
+              <p className="mt-6 max-w-md text-sm leading-7 text-slate-400">요청을 바로 착수하지 않습니다. 목적과 자료 상태를 먼저 확인하고, 가능한 범위와 납품 기준을 문서로 맞춥니다.</p>
+              <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2">
+                {['비대면 진행', '범위·일정·비용 확인', '보안 방식 협의', '납품 전 기본 검수'].map((item, index) => (
+                  <div key={item} className="bg-[#0d1932] px-5 py-5 text-sm font-semibold text-slate-200">
+                    <span className="mr-3 font-mono text-[10px] text-blue-300">0{index + 1}</span>{item}
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="text-left">
-              <p className="text-xs font-bold tracking-widest text-brand-blue">PROCESS</p>
-              <h2 className="mt-3 font-display text-3xl font-extrabold text-brand-navy">진행 절차</h2>
-              <ol className="mt-8 space-y-3 text-sm text-slate-600">
-                {['문의 접수', '자료 및 작업범위 확인', '견적·납기 안내', '결제 또는 착수금 확인', '작업 및 검수', '온라인 납품', '사전 합의 범위 내 수정'].map((item, index) => <li key={item} className="flex items-center gap-3"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-navy text-xs font-bold text-white">{index + 1}</span>{item}</li>)}
-              </ol>
+            <div className="lg:col-span-7">
+              <div className="rounded-[2rem] border border-white/10 bg-white/[0.05] p-6 backdrop-blur-sm sm:p-9">
+                <div className="flex items-center justify-between border-b border-white/10 pb-5">
+                  <p className="text-xs font-bold tracking-[0.2em] text-slate-400">PROJECT FLOW</p>
+                  <span className="text-xs text-slate-500">01 — 07</span>
+                </div>
+                <ol className="mt-2 divide-y divide-white/10">
+                  {['문의 접수', '자료 및 작업범위 확인', '견적·납기 안내', '결제 또는 착수금 확인', '작업 및 검수', '온라인 납품', '합의 범위 내 수정'].map((item, index) => (
+                    <li key={item} className="group flex items-center gap-5 py-4 text-sm text-slate-300 transition-colors hover:text-white">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-blue-300/25 bg-blue-300/10 font-mono text-[10px] font-bold text-blue-200">{index + 1}</span>
+                      <span className="font-semibold">{item}</span>
+                      <span className="ml-auto h-px w-8 bg-white/10 transition-all group-hover:w-12 group-hover:bg-blue-300/50" />
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20" id="work-samples">
-        <div className="mx-auto max-w-7xl px-6 text-center sm:px-8 lg:px-12">
-          <p className="text-xs font-bold tracking-widest text-brand-blue">WORK SAMPLES</p>
-          <h2 className="mt-3 font-display text-3xl font-extrabold text-brand-navy">작업 예시</h2>
-          <p className="mt-4 text-sm text-slate-500">작업 예시 준비 중입니다. 실제 기업명, 개인정보와 영업비밀이 포함되지 않은 샘플부터 순차적으로 공개합니다.</p>
-          <div className="mt-8 grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-5">
-            {['한→중 제품소개 문서', '중→한 기업자료 번역', '중국 업체 기초조사표', '중국 비즈니스 이메일', 'AI 번역문 수정 전·후'].map((item) => <div key={item} className="rounded-2xl border border-slate-100 bg-slate-50 p-5 text-sm font-bold text-brand-navy">{item}</div>)}
+      <section className="bg-[#f6f3ec] py-24 sm:py-32" id="work-samples">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+          <div className="grid gap-8 border-b border-slate-300/70 pb-10 lg:grid-cols-2 lg:items-end">
+            <div className="text-left">
+              <p className="text-xs font-bold tracking-[0.22em] text-brand-blue">DELIVERABLES</p>
+              <h2 className="mt-4 font-display text-3xl font-extrabold text-brand-navy sm:text-4xl">말보다 결과물로<br />업무 가치를 보여드립니다.</h2>
+            </div>
+            <p className="max-w-xl text-sm leading-7 text-slate-600 lg:justify-self-end">기업명, 개인정보, 영업비밀을 공개하지 않습니다. 공개 가능한 범위에서 문서 유형과 작업 방식을 확인할 수 있는 샘플을 순차적으로 제공합니다.</p>
+          </div>
+          <div className="mt-10 grid gap-px overflow-hidden rounded-[2rem] border border-slate-300/70 bg-slate-300/70 sm:grid-cols-2 lg:grid-cols-5">
+            {['한→중 제품소개 문서', '중→한 기업자료 번역', '중국 업체 기초조사표', '중국 비즈니스 이메일', 'AI 번역문 수정 전·후'].map((item, index) => (
+              <div key={item} className="group min-h-48 bg-[#fbfaf7] p-7 text-left transition-colors hover:bg-white">
+                <span className="font-mono text-[10px] font-bold tracking-widest text-brand-blue">SAMPLE 0{index + 1}</span>
+                <h3 className="mt-12 font-display text-base font-extrabold leading-6 text-brand-navy">{item}</h3>
+                <div className="mt-6 h-0.5 w-8 bg-brand-blue transition-all group-hover:w-14" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -104,10 +129,14 @@ export default function HomePage({
         onEditImage={(currentUrl) => onOpenImageSelector('director', currentUrl || config.director.imageUrl, '디렉터 프로필 이미지')}
       />
 
-      <section className="border-y border-slate-100 bg-slate-50 py-12">
-        <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-5 px-6 text-left sm:flex-row sm:items-center">
-          <div><h2 className="font-display text-xl font-extrabold text-brand-navy">AI 실전 중국어 콘텐츠</h2><p className="mt-2 text-sm text-slate-500">AI를 활용한 실전 중국어 전자책과 비즈니스 중국어 콘텐츠도 제작합니다.</p></div>
-          <a href="https://book.aivexa.co.kr" target="_blank" rel="noreferrer" className="rounded-full border border-brand-navy px-5 py-2.5 text-xs font-bold text-brand-navy hover:bg-brand-navy hover:text-white">전자책 보기</a>
+      <section className="bg-white py-16">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-7 px-6 sm:px-8 md:flex-row md:items-center lg:px-12">
+          <div className="flex items-start gap-5 text-left">
+            <span className="font-mono text-xs font-bold tracking-[0.2em] text-brand-blue">AIVEXA BOOKS</span>
+            <div className="hidden h-14 w-px bg-slate-200 sm:block" />
+            <div><h2 className="font-display text-xl font-extrabold text-brand-navy">AI 실전 중국어 콘텐츠</h2><p className="mt-2 text-sm leading-6 text-slate-500">전자책과 비즈니스 중국어 콘텐츠는 별도 전문 사이트에서 확인할 수 있습니다.</p></div>
+          </div>
+          <a href="https://book.aivexa.co.kr" target="_blank" rel="noreferrer" className="rounded-full bg-brand-navy px-6 py-3 text-xs font-bold text-white transition-all hover:bg-brand-blue hover:shadow-lg">전자책 사이트 보기 →</a>
         </div>
       </section>
 
@@ -116,39 +145,6 @@ export default function HomePage({
         onSubmitInquiry={onSubmitInquiry}
       />
 
-      {/* B2B Footprint Info banner */}
-      <section className="bg-slate-50 py-12 border-t border-slate-100">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3 text-left">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white border border-slate-200/60 p-1.5 shadow-sm">
-              <svg viewBox="9 10 29 32" className="h-full w-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Navy Left Leg */}
-                <polygon points="11,40 20.3,12 25.3,12 16,40" fill="#0B132B" />
-                {/* Navy Middle Leg Top */}
-                <polygon points="20.3,12 25.3,12 30.6,28 25.6,28" fill="#0B132B" />
-                {/* Navy Crossbar */}
-                <polygon points="20,28 25.6,28 26.8,31.5 18.8,31.5" fill="#0B132B" />
-                {/* Blue Right Leg of X */}
-                <polygon points="21.6,40 30.9,12 35.9,12 26.6,40" fill="#1C3FFD" />
-                {/* Blue Bottom-Right Leg of X */}
-                <polygon points="25.6,28 30.6,28 34.5,40 29.5,40" fill="#1C3FFD" />
-              </svg>
-            </div>
-            <div>
-              <p className="font-display text-sm font-bold text-brand-navy">AIVEXA B2B 제안서 다운로드</p>
-              <p className="text-xs text-slate-400">공공기관 및 기업 CSR/ESG 부서 맞춤형 협력 기획서</p>
-            </div>
-          </div>
-          <a
-            href="/aivexa-b2b-proposal.pdf"
-            download
-            className="flex items-center gap-1.5 rounded-full border border-brand-navy px-5 py-2 text-xs font-bold text-brand-navy hover:bg-brand-navy hover:text-white transition-all"
-          >
-            <span>제안서 PDF 다운로드</span>
-            <ChevronRight className="h-4 w-4" />
-          </a>
-        </div>
-      </section>
     </>
   );
 }

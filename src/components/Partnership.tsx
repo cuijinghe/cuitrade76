@@ -24,24 +24,24 @@ const partnerIcons: Record<string, React.ReactNode> = {
 
 export default function Partnership({ title, description, targets }: PartnershipProps) {
   return (
-    <section className="bg-white py-20 sm:py-28" id="partnership">
+    <section className="bg-white py-24 sm:py-32" id="partnership">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         
         {/* Core Partnership Statement */}
-        <div className="mx-auto max-w-3xl text-center mb-16">
-          <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-100 px-4 py-1.5 text-xs font-bold tracking-widest text-brand-blue uppercase mb-4">
-            COOPERATION PARTNERS
-          </div>
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl" id="partnership-title">
+        <div className="mb-16 grid gap-8 border-b border-slate-200 pb-10 text-left lg:grid-cols-2 lg:items-end">
+          <div>
+            <p className="text-xs font-bold tracking-[0.22em] text-brand-blue">COOPERATION MODEL</p>
+            <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl" id="partnership-title">
             {title}
-          </h2>
-          <p className="mt-6 text-sm sm:text-base leading-relaxed text-slate-500 font-sans break-keep whitespace-pre-line" id="partnership-description">
+            </h2>
+          </div>
+          <p className="max-w-xl text-sm leading-7 text-slate-500 lg:justify-self-end" id="partnership-description">
             {description}
           </p>
         </div>
 
         {/* Elegant B2B Target Grid */}
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {targets.map((target, index) => (
             <motion.div
               key={target}
@@ -49,11 +49,11 @@ export default function Partnership({ title, description, targets }: Partnership
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="flex items-center gap-4 rounded-2xl border border-slate-100 bg-slate-50/30 p-6 transition-all duration-200 hover:border-slate-300 hover:bg-white hover:shadow-lg hover:shadow-brand-navy/2"
+              className="group flex min-h-32 items-center gap-5 rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-brand-navy/5"
               id={`partner-target-${index}`}
             >
               {/* Target Icon container */}
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white border border-slate-100 shadow-xs">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-50 transition-colors group-hover:bg-blue-50">
                 {partnerIcons[target] || <Building className="h-5 w-5 text-brand-navy" />}
               </div>
               
@@ -61,8 +61,8 @@ export default function Partnership({ title, description, targets }: Partnership
                 <h4 className="font-display text-sm font-bold text-brand-navy tracking-tight">
                   {target}
                 </h4>
-                <p className="mt-1 text-xs text-slate-400 font-sans">
-                  지속 가능한 협력 모델
+                <p className="mt-2 text-xs text-slate-400 font-sans">
+                  목적·역할·산출물 협의
                 </p>
               </div>
             </motion.div>
@@ -70,25 +70,25 @@ export default function Partnership({ title, description, targets }: Partnership
         </div>
 
         {/* Bottom Banner Card - Deep Trust Statement */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="mt-16 rounded-3xl bg-brand-navy p-8 sm:p-12 text-left relative overflow-hidden"
+          className="relative mt-16 overflow-hidden rounded-[2rem] bg-[#081229] p-8 text-left sm:p-12"
           id="partnership-banner"
         >
           {/* subtle decorative background mesh */}
-          <div className="absolute top-0 right-0 -z-0 h-64 w-64 rounded-full bg-brand-blue/10 blur-3xl" />
+          <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-brand-blue/15 blur-3xl" />
           
           <div className="relative z-10 max-w-3xl">
-            <p className="font-mono text-xs font-bold tracking-widest text-brand-blue/80 uppercase mb-3">
-              ESTABLISHING CREDIBILITY
+            <p className="font-mono text-xs font-bold tracking-[0.2em] text-blue-300 uppercase mb-3">
+              CLEAR SCOPE, RESPONSIBLE DELIVERY
             </p>
             <h3 className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
-              실무형 임팩트 프로젝트와 로컬 상생을 추구하는 비즈니스 파트너
+              협력의 시작부터 결과물까지, 기준을 명확히 합니다.
             </h3>
-            <p className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-400 font-sans break-keep">
-              AIVEXA는 공공기관, 지자체 실무 담당자와 다년간 협업하며 공공사업 절차와 예산 집행, 성과 보고 양식까지 철저히 분석하고 최적화해 왔습니다. 행정 프로세스의 높은 이해도와 민간 최고 수준의 기획 역량을 결합하여 신뢰를 증명합니다.
+            <p className="mt-4 max-w-2xl text-xs leading-7 text-slate-400 sm:text-sm">
+              프로젝트 목적, 역할 분담, 납품 형태와 일정을 먼저 확인합니다. 확인되지 않은 성과를 약속하기보다 수행 가능한 범위와 필요한 조건을 투명하게 안내합니다.
             </p>
           </div>
         </motion.div>
