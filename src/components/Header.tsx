@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BookOpen, LogIn, Menu, UserRound, X } from 'lucide-react';
 
 interface HeaderProps {
@@ -12,6 +12,23 @@ interface HeaderProps {
 
 export default function Header({ onNavigate, activeSection, currentPath, onLogoClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [member, setMember] = useState<{ displayName?: string; fullName?: string } | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    const loadMember = () => {
+      fetch('/api/auth/session', { credentials: 'include' })
+        .then(async (response) => response.ok ? (await response.json()).user : null)
+        .then((user) => { if (active) setMember(user); })
+        .catch(() => { if (active) setMember(null); });
+    };
+    loadMember();
+    window.addEventListener('aivexa-auth-changed', loadMember);
+    return () => {
+      active = false;
+      window.removeEventListener('aivexa-auth-changed', loadMember);
+    };
+  }, []);
   const menuItems = [
     { id: 'services', label: '서비스' },
     { id: 'pricing', label: '가격 안내·견적서' },
@@ -109,12 +126,12 @@ export default function Header({ onNavigate, activeSection, currentPath, onLogoC
         {/* Primary consultation action */}
         <div className="flex items-center gap-2 sm:gap-3">
           <a
-            href="/login"
+            href={member ? "/account" : "/login"}
             className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-2.5 text-[11px] font-bold text-brand-navy transition-colors hover:border-brand-blue hover:text-brand-blue sm:px-4 sm:text-xs"
           >
-            <LogIn className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">로그인·회원가입</span>
-            <span className="sm:hidden">로그인</span>
+            {member ? <UserRound className="h-3.5 w-3.5" /> : <LogIn className="h-3.5 w-3.5" />}
+            <span className="hidden sm:inline">{member ? `${member.fullName || member.displayName || '회원'}님` : '로그인·회원가입'}</span>
+            <span className="sm:hidden">{member ? (member.fullName || member.displayName || '회원') : '로그인'}</span>
           </a>
           <button
             onClick={() => onNavigate('inquiry')}

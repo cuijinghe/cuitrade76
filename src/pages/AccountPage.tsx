@@ -6,7 +6,7 @@ type User = { email: string; displayName?: string; fullName?: string; provider?:
 export default function AccountPage() {
   const [user, setUser] = useState<User | null | undefined>(undefined);
   useEffect(() => {
-    fetch('https://books.aivexa.co.kr/api/auth/local', { credentials: 'include' })
+    fetch('/api/auth/session', { credentials: 'include' })
       .then(async (response) => response.ok ? (await response.json()).user : null)
       .then(setUser)
       .catch(() => setUser(null));

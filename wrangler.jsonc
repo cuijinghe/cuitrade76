@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cuitrade76",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-08-04",
+  "assets": { "directory": "./dist", "binding": "ASSETS", "not_found_handling": "single-page-application" },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "aivexa-members", "database_id": "8fae983b-2280-47a2-8b3e-df22ddcaab48" }
+  ]
+}
