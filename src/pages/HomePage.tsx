@@ -136,7 +136,7 @@ export default function HomePage({
             <div className="hidden h-14 w-px bg-slate-200 sm:block" />
             <div><h2 className="font-display text-xl font-extrabold text-brand-navy">AI 실전 중국어 콘텐츠</h2><p className="mt-2 text-sm leading-6 text-slate-500">전자책과 비즈니스 중국어 콘텐츠는 별도 전문 사이트에서 확인할 수 있습니다.</p></div>
           </div>
-          <a href="https://book.aivexa.co.kr" target="_blank" rel="noreferrer" className="rounded-full bg-brand-navy px-6 py-3 text-xs font-bold text-white transition-all hover:bg-brand-blue hover:shadow-lg">전자책 사이트 보기 →</a>
+          <a href="https://books.aivexa.co.kr" target="_blank" rel="noreferrer" className="rounded-full bg-brand-navy px-6 py-3 text-xs font-bold text-white transition-all hover:bg-brand-blue hover:shadow-lg">전자책 사이트 보기 →</a>
         </div>
       </section>
 

@@ -97,7 +97,7 @@ export default function Header({ onNavigate, activeSection, currentPath, onLogoC
             </button>
           ))}
           <a
-            href="https://book.aivexa.co.kr"
+            href="https://books.aivexa.co.kr"
             target="_blank"
             rel="noreferrer"
             className="font-display text-sm font-medium text-slate-600 transition-colors duration-200 hover:text-brand-navy"
@@ -109,7 +109,7 @@ export default function Header({ onNavigate, activeSection, currentPath, onLogoC
         {/* Primary consultation action */}
         <div className="flex items-center gap-2 sm:gap-3">
           <a
-            href="https://book.aivexa.co.kr/login"
+            href="https://books.aivexa.co.kr/login"
             className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-2.5 text-[11px] font-bold text-brand-navy transition-colors hover:border-brand-blue hover:text-brand-blue sm:px-4 sm:text-xs"
           >
             <LogIn className="h-3.5 w-3.5" />
@@ -151,7 +151,7 @@ export default function Header({ onNavigate, activeSection, currentPath, onLogoC
                     <span className="mt-2 block text-sm font-bold text-brand-navy">{item.label}</span>
                   </button>
                 ))}
-                <a href="https://book.aivexa.co.kr" className="bg-white px-5 py-5 text-left transition-colors hover:bg-slate-50">
+                <a href="https://books.aivexa.co.kr" className="bg-white px-5 py-5 text-left transition-colors hover:bg-slate-50">
                   <span className="font-mono text-[9px] text-slate-400">06</span>
                   <span className="mt-2 flex items-center gap-2 text-sm font-bold text-brand-navy"><BookOpen className="h-4 w-4 text-brand-blue" />전자책</span>
                 </a>
@@ -161,7 +161,7 @@ export default function Header({ onNavigate, activeSection, currentPath, onLogoC
               <p className="text-[10px] font-bold tracking-[0.2em] text-blue-300">CUSTOMER DESK</p>
               <p className="mt-3 text-sm leading-6 text-slate-300">회원정보와 전자책 구매내역은 기존 마이페이지에서 확인할 수 있습니다.</p>
               <div className="mt-5 grid gap-2">
-                <a href="https://book.aivexa.co.kr/account" className="flex items-center justify-between rounded-xl bg-white px-4 py-3 text-xs font-bold text-brand-navy">
+                <a href="https://books.aivexa.co.kr/account" className="flex items-center justify-between rounded-xl bg-white px-4 py-3 text-xs font-bold text-brand-navy">
                   <span className="flex items-center gap-2"><UserRound className="h-4 w-4" />마이페이지</span><span>→</span>
                 </a>
                 <button onClick={() => navigateAndClose('inquiry')} className="flex items-center justify-between rounded-xl border border-white/15 px-4 py-3 text-xs font-bold text-white">
