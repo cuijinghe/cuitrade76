@@ -4,7 +4,6 @@ import Services from '../components/Services';
 import Partnership from '../components/Partnership';
 import Director from '../components/Director';
 import InquiryForm from '../components/InquiryForm';
-import Pricing from '../components/Pricing';
 import { SiteConfig, Inquiry } from '../types';
 
 interface HomePageProps {
@@ -57,8 +56,6 @@ export default function HomePage({
         onEditItem={(itemId, currentUrl, title) => onOpenImageSelector(itemId, currentUrl, title)}
         onNavigate={onNavigate}
       />
-
-      <Pricing onNavigate={onNavigate} />
 
       <section className="relative overflow-hidden bg-[#081229] py-16 text-white sm:py-24 lg:py-28" id="work-process">
         <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />

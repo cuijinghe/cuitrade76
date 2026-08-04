@@ -14,7 +14,7 @@ export default function Header({ onNavigate, activeSection, currentPath, onLogoC
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuItems = [
     { id: 'services', label: '서비스' },
-    { id: 'pricing', label: '가격·견적' },
+    { id: 'pricing', label: '가격 안내·견적서' },
     { id: 'projects', label: '작업 예시' },
     { id: 'director', label: 'AIVEXA 소개' },
     { id: 'faq', label: '진행 절차·FAQ' },
@@ -83,7 +83,7 @@ export default function Header({ onNavigate, activeSection, currentPath, onLogoC
 
         {/* Navigation Menu */}
         <nav className="hidden md:flex items-center gap-8 lg:gap-10">
-          {menuItems.map((item) => (
+          {menuItems.filter((item) => item.id !== 'pricing').map((item) => (
             <button
               key={item.id}
               onClick={() => onNavigate(item.id)}

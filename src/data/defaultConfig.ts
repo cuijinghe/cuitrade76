@@ -14,26 +14,26 @@ export const DEFAULT_SITE_CONFIG: SiteConfig = {
     items: [
       {
         id: 'service-1',
-        title: '기업문서 번역·검수',
-        description: '회사·제품소개서와 비즈니스 자료의 한중·중한 번역, AI 번역문 검수와 자연스러운 표현 수정을 지원합니다. 전문문서는 사전 협의가 필요합니다.',
+        title: '기업문서 작성·교정',
+        description: '비즈니스 이메일, 위챗 문장, 회사소개, 제품소개, 제안문과 일반 기업문서를 작성하거나 자연스럽게 교정합니다.',
         imageUrl: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=600'
       },
       {
         id: 'service-2',
-        title: '중국 비즈니스 문장 지원',
-        description: '중국 거래처와 주고받는 위챗, 이메일, 견적·샘플·MOQ·납기 문의 문장을 실무 상황에 맞게 작성하고 검수합니다.',
+        title: '한중·중한 번역 및 검수',
+        description: '기업문서, 제품자료, 이메일, 마케팅 문안의 한중·중한 번역과 AI 번역 결과의 표현 검수를 지원합니다. 전문문서는 사전 검토 후 안내합니다.',
         imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=600'
       },
       {
         id: 'service-3',
         title: '중국 업체·시장 기초조사',
-        description: '공개자료를 바탕으로 중국 기업, 제품, 경쟁사와 시장 정보를 조사해 표와 문서로 정리합니다. 신용·안전·품질을 보증하지 않습니다.',
+        description: '공개적으로 확인 가능한 자료를 바탕으로 중국 업체, 제품, 경쟁사 및 시장 정보를 표와 문서로 정리합니다. 신용도·거래 안전·제품 품질·계약 성사를 보증하지 않습니다.',
         imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600'
       },
       {
         id: 'service-4',
         title: '해외영업 문서 지원',
-        description: '제품·회사소개 자료, 제안문, 해외영업 이메일과 상담 전후 후속 문서 제작을 지원합니다.',
+        description: '해외 거래에 필요한 제안 이메일, 견적 후속 문서, 회사·제품소개 문안, 미팅 준비자료를 지원합니다. 거래 성사·매출·수출성과를 보장하지 않습니다.',
         imageUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=600'
       },
       {

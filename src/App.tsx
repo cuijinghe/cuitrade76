@@ -98,8 +98,8 @@ function AppContent() {
         description = '필요한 업무와 납기를 알려주시면 작업 가능 여부, 범위, 예상 납기와 비용을 안내합니다.';
         break;
       case '/pricing':
-        title = 'AIVEXA 서비스 가격 | 중국어 번역·시장조사·해외영업 문서·AI 교육';
-        description = 'AIVEXA의 한중·중한 번역, AI 번역 검수, 중국 업체·시장조사, 해외영업 문서 지원 및 기업 AI 교육의 시작가격과 견적 기준을 확인하세요.';
+        title = 'AIVEXA 서비스 가격 | 중국어 번역·중국 업체 조사·해외영업 문서·AI 교육';
+        description = 'AIVEXA의 한중·중한 번역, AI 번역 검수, 중국 업체 조사, 해외영업 문서 지원과 기업 AI 교육의 시작가격 및 견적 기준을 확인하세요.';
         break;
       case '/privacy':
         title = '개인정보처리방침 | AIVEXA';

@@ -41,8 +41,8 @@ export default function Hero({ onNavigate }: HeroProps) {
             className="mt-7 max-w-4xl font-display text-[2.35rem] font-extrabold leading-[1.2] tracking-[-0.035em] text-white sm:text-5xl lg:text-[3.8rem]"
             id="hero-heading"
           >
-            복잡한 글로벌 업무를
-            <span className="mt-2 block text-blue-300">실행 가능한 문서와 결과로.</span>
+            기업의 AI·문서·글로벌 업무를
+            <span className="mt-2 block text-blue-300">지원합니다.</span>
           </motion.h1>
 
           <motion.p
@@ -52,8 +52,8 @@ export default function Hero({ onNavigate }: HeroProps) {
             className="mt-6 max-w-2xl text-[0.95rem] leading-7 text-slate-300 sm:text-lg sm:leading-8"
             id="hero-subtitle"
           >
-            기업 문서, 한중 번역, 중국 시장조사, 해외영업 자료와 AI 업무 활용까지.
-            필요한 범위와 일정, 비용을 먼저 명확히 확인하고 책임 있게 진행합니다.
+            AIVEXA는 기업문서 작성, 한중·중한 번역, 중국 업체·시장 기초조사, 해외영업 자료 및 기업 AI 활용을 비대면으로 지원합니다.
+            필요한 업무와 납기를 확인한 후 작업 범위와 비용을 명확히 안내합니다. 소량·단기 프로젝트부터 협업할 수 있습니다.
           </motion.p>
 
           <motion.div
@@ -67,7 +67,7 @@ export default function Hero({ onNavigate }: HeroProps) {
               className="group flex items-center gap-3 rounded-full bg-[#3155ff] px-7 py-4 text-sm font-bold text-white transition-all hover:bg-[#4263ff] hover:shadow-2xl hover:shadow-blue-950/40"
               id="hero-btn-inquiry"
             >
-              프로젝트 상담 요청
+              견적 문의하기
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
             <button
@@ -75,7 +75,7 @@ export default function Hero({ onNavigate }: HeroProps) {
               className="rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white transition-all hover:border-white/40 hover:bg-white/10"
               id="hero-btn-services"
             >
-              지원 분야 확인
+              서비스 확인
             </button>
           </motion.div>
 
