@@ -97,15 +97,15 @@ export default function InquiryForm({ onSubmitInquiry }: InquiryFormProps) {
   };
 
   return (
-    <section className="border-t border-slate-200 bg-[#f6f7fa] py-24 sm:py-32" id="inquiry">
+    <section className="border-t border-slate-200 bg-[#f6f7fa] py-16 sm:py-24 lg:py-28" id="inquiry">
       <div className="mx-auto max-w-5xl px-6 sm:px-8">
         
         {/* Section Header */}
-        <div className="mb-14 grid gap-6 text-left lg:grid-cols-2 lg:items-end">
+        <div className="mb-10 grid gap-6 text-left sm:mb-14 lg:grid-cols-2 lg:items-end">
           <div>
             <p className="text-xs font-bold tracking-[0.22em] text-brand-blue">PROJECT INQUIRY</p>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl">
-            필요한 업무를<br />먼저 정확히 알려주세요.
+            필요한 업무를<span className="sm:hidden"> </span><br className="hidden sm:block" />먼저 정확히 알려주세요.
           </h2>
           </div>
           <p className="max-w-xl text-sm leading-7 text-slate-500 lg:justify-self-end">
@@ -114,7 +114,7 @@ export default function InquiryForm({ onSubmitInquiry }: InquiryFormProps) {
         </div>
 
         {/* Form Area */}
-        <div className="relative rounded-[2rem] border border-slate-200 bg-white p-8 shadow-2xl shadow-slate-900/5 sm:p-12">
+        <div className="relative rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-2xl shadow-slate-900/5 sm:rounded-[2rem] sm:p-12">
           
           <AnimatePresence mode="wait">
             {submitSuccess ? (

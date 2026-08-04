@@ -22,11 +22,11 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export default function Services({ title, items, onNavigate }: ServicesProps) {
   return (
-    <section className="bg-slate-50/50 py-20 sm:py-28" id="services">
+    <section className="bg-slate-50/50 py-16 sm:py-24 lg:py-28" id="services">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         
         {/* Section Header */}
-        <div className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between">
+        <div className="mb-10 flex flex-col md:mb-14 md:flex-row md:items-end md:justify-between">
           <div className="text-left">
             <p className="font-mono text-xs font-bold tracking-widest text-brand-blue uppercase mb-2">
               AIVEXA SOLUTIONS & OPERATIONS
@@ -41,7 +41,7 @@ export default function Services({ title, items, onNavigate }: ServicesProps) {
         </div>
 
         {/* 4 Cards Grid - Fully customizable & polished */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2" id="projects">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3" id="projects">
           {items.map((item, index) => (
             <motion.div
               key={item.id}
@@ -53,7 +53,7 @@ export default function Services({ title, items, onNavigate }: ServicesProps) {
               id={`service-card-${item.id}`}
             >
               {/* Image-free service identifier */}
-              <div className="flex items-center justify-between bg-brand-navy px-8 py-7 sm:px-10">
+              <div className="flex items-center justify-between bg-brand-navy px-6 py-6 sm:px-8">
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10">
                   {iconMap[item.id] || <Building2 className="h-5 w-5 text-white" />}
                 </div>
@@ -61,7 +61,7 @@ export default function Services({ title, items, onNavigate }: ServicesProps) {
               </div>
 
               {/* Text Card Body */}
-              <div className="flex flex-1 flex-col p-8 sm:p-10 text-left">
+              <div className="flex flex-1 flex-col p-6 sm:p-8 text-left">
                 <h3 className="font-display text-xl font-bold tracking-tight text-brand-navy group-hover:text-brand-blue transition-colors duration-200">
                   {item.title}
                 </h3>

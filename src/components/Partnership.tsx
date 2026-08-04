@@ -24,11 +24,11 @@ const partnerIcons: Record<string, React.ReactNode> = {
 
 export default function Partnership({ title, description, targets }: PartnershipProps) {
   return (
-    <section className="bg-white py-24 sm:py-32" id="partnership">
+    <section className="bg-white py-16 sm:py-24 lg:py-28" id="partnership">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         
         {/* Core Partnership Statement */}
-        <div className="mb-16 grid gap-8 border-b border-slate-200 pb-10 text-left lg:grid-cols-2 lg:items-end">
+        <div className="mb-10 grid gap-6 border-b border-slate-200 pb-8 text-left sm:mb-14 sm:gap-8 sm:pb-10 lg:grid-cols-2 lg:items-end">
           <div>
             <p className="text-xs font-bold tracking-[0.22em] text-brand-blue">COOPERATION MODEL</p>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl" id="partnership-title">
@@ -74,7 +74,7 @@ export default function Partnership({ title, description, targets }: Partnership
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="relative mt-16 overflow-hidden rounded-[2rem] bg-[#081229] p-8 text-left sm:p-12"
+          className="relative mt-10 overflow-hidden rounded-[1.5rem] bg-[#081229] p-7 text-left sm:mt-14 sm:rounded-[2rem] sm:p-12"
           id="partnership-banner"
         >
           {/* subtle decorative background mesh */}

@@ -11,7 +11,7 @@ interface DirectorProps {
 
 export default function Director({ config }: DirectorProps) {
   return (
-    <section className="bg-slate-50/50 py-20 sm:py-28" id="director">
+    <section className="bg-slate-50/50 py-16 sm:py-24 lg:py-28" id="director">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
           
@@ -25,7 +25,7 @@ export default function Director({ config }: DirectorProps) {
               className="relative overflow-hidden rounded-3xl bg-brand-navy p-8 text-white shadow-xl sm:p-10"
             >
               <p className="text-xs font-bold tracking-[0.2em] text-blue-300">AIVEXA PROJECT LEAD</p>
-              <h3 className="mt-5 font-display text-3xl font-extrabold leading-tight">실무를 이해하는<br />프로젝트 파트너</h3>
+              <h3 className="mt-5 font-display text-3xl font-extrabold leading-tight">실무를 이해하는<span className="sm:hidden"> </span><br className="hidden sm:block" />프로젝트 파트너</h3>
               <p className="mt-5 text-sm leading-7 text-slate-300">글로벌 무역·해외영업과 한중 비즈니스 커뮤니케이션 경험을 기반으로 필요한 결과물에 집중합니다.</p>
               <div className="mt-8 space-y-4 border-t border-white/10 pt-7">
                 {['업무 목적과 납품 기준 확인', '책임 범위와 일정 사전 협의', '기업 자료의 보안 방식 협의'].map((item) => (
@@ -45,7 +45,7 @@ export default function Director({ config }: DirectorProps) {
             </span>
             
             <h2 className="font-display text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl leading-tight">
-              실무 전문성에 기반한<br />
+              실무 전문성에 기반한<span className="sm:hidden"> </span><br className="hidden sm:block" />
               지속 가능한 실전 프로젝트 파트너십.
             </h2>
 

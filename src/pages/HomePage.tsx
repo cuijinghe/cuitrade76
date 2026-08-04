@@ -32,14 +32,14 @@ export default function HomePage({
       />
       {/* Evidence-safe trust strip */}
       <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto grid max-w-7xl divide-y divide-slate-200 px-6 sm:grid-cols-2 sm:divide-x sm:divide-y-0 sm:px-8 lg:grid-cols-4 lg:px-12">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px bg-slate-200 sm:px-8 lg:grid-cols-4 lg:px-12">
           {[
             ['20년+ 실무 경험', '글로벌 무역·해외영업 기반'],
             ['한중 업무 전문성', '문서·번역·거래 커뮤니케이션'],
             ['기업·기관 대응', '요청 목적과 납품 기준 중심'],
             ['명확한 진행 기준', '범위·일정·비용 사전 안내'],
           ].map(([label, desc]) => (
-            <div key={label} className="px-5 py-7 text-left first:pl-0 last:pr-0 sm:px-6">
+            <div key={label} className="bg-white px-4 py-6 text-left sm:px-6 sm:py-7">
               <p className="font-display text-sm font-extrabold text-brand-navy">{label}</p>
               <p className="mt-2 text-xs leading-5 text-slate-500">{desc}</p>
             </div>
@@ -57,13 +57,13 @@ export default function HomePage({
         onNavigate={onNavigate}
       />
 
-      <section className="relative overflow-hidden bg-[#081229] py-24 text-white sm:py-32" id="work-process">
+      <section className="relative overflow-hidden bg-[#081229] py-16 text-white sm:py-24 lg:py-28" id="work-process">
         <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
         <div className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="text-left lg:col-span-5">
               <p className="text-xs font-bold tracking-[0.22em] text-blue-300">WORK STANDARD</p>
-              <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight sm:text-4xl">좋은 결과는<br />명확한 기준에서 시작됩니다.</h2>
+              <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight sm:text-4xl">좋은 결과는<span className="sm:hidden"> </span><br className="hidden sm:block" />명확한 기준에서 시작됩니다.</h2>
               <p className="mt-6 max-w-md text-sm leading-7 text-slate-400">요청을 바로 착수하지 않습니다. 목적과 자료 상태를 먼저 확인하고, 가능한 범위와 납품 기준을 문서로 맞춥니다.</p>
               <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2">
                 {['비대면 진행', '범위·일정·비용 확인', '보안 방식 협의', '납품 전 기본 검수'].map((item, index) => (
@@ -94,18 +94,18 @@ export default function HomePage({
         </div>
       </section>
 
-      <section className="bg-[#f6f3ec] py-24 sm:py-32" id="work-samples">
+      <section className="bg-[#f6f3ec] py-16 sm:py-24 lg:py-28" id="work-samples">
         <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
           <div className="grid gap-8 border-b border-slate-300/70 pb-10 lg:grid-cols-2 lg:items-end">
             <div className="text-left">
               <p className="text-xs font-bold tracking-[0.22em] text-brand-blue">DELIVERABLES</p>
-              <h2 className="mt-4 font-display text-3xl font-extrabold text-brand-navy sm:text-4xl">말보다 결과물로<br />업무 가치를 보여드립니다.</h2>
+              <h2 className="mt-4 font-display text-3xl font-extrabold text-brand-navy sm:text-4xl">말보다 결과물로<span className="sm:hidden"> </span><br className="hidden sm:block" />업무 가치를 보여드립니다.</h2>
             </div>
             <p className="max-w-xl text-sm leading-7 text-slate-600 lg:justify-self-end">기업명, 개인정보, 영업비밀을 공개하지 않습니다. 공개 가능한 범위에서 문서 유형과 작업 방식을 확인할 수 있는 샘플을 순차적으로 제공합니다.</p>
           </div>
-          <div className="mt-10 grid gap-px overflow-hidden rounded-[2rem] border border-slate-300/70 bg-slate-300/70 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-[1.5rem] border border-slate-300/70 bg-slate-300/70 sm:mt-10 sm:rounded-[2rem] lg:grid-cols-5">
             {['한→중 제품소개 문서', '중→한 기업자료 번역', '중국 업체 기초조사표', '중국 비즈니스 이메일', 'AI 번역문 수정 전·후'].map((item, index) => (
-              <div key={item} className="group min-h-48 bg-[#fbfaf7] p-7 text-left transition-colors hover:bg-white">
+              <div key={item} className="group min-h-40 bg-[#fbfaf7] p-6 text-left transition-colors hover:bg-white sm:min-h-48 sm:p-7">
                 <span className="font-mono text-[10px] font-bold tracking-widest text-brand-blue">SAMPLE 0{index + 1}</span>
                 <h3 className="mt-12 font-display text-base font-extrabold leading-6 text-brand-navy">{item}</h3>
                 <div className="mt-6 h-0.5 w-8 bg-brand-blue transition-all group-hover:w-14" />

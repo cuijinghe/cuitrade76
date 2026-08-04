@@ -23,7 +23,7 @@ export default function Hero({ onNavigate }: HeroProps) {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(46,92,255,0.22),transparent_34%),linear-gradient(135deg,transparent_0%,rgba(255,255,255,0.025)_48%,transparent_100%)]" />
       <div className="absolute inset-y-0 right-[11%] hidden w-px bg-white/10 lg:block" />
 
-      <div className="relative mx-auto grid max-w-7xl gap-14 px-6 py-20 sm:px-8 sm:py-28 lg:grid-cols-12 lg:items-center lg:gap-16 lg:px-12 lg:py-32">
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-16 sm:px-8 sm:py-24 lg:grid-cols-12 lg:items-center lg:gap-16 lg:px-12 lg:py-28">
         <div className="lg:col-span-7">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -38,7 +38,7 @@ export default function Hero({ onNavigate }: HeroProps) {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.08 }}
-            className="mt-8 max-w-4xl font-display text-4xl font-extrabold leading-[1.18] tracking-[-0.035em] text-white sm:text-5xl lg:text-[3.8rem]"
+            className="mt-7 max-w-4xl font-display text-[2.35rem] font-extrabold leading-[1.2] tracking-[-0.035em] text-white sm:text-5xl lg:text-[3.8rem]"
             id="hero-heading"
           >
             복잡한 글로벌 업무를
@@ -49,7 +49,7 @@ export default function Hero({ onNavigate }: HeroProps) {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.16 }}
-            className="mt-7 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg"
+            className="mt-6 max-w-2xl text-[0.95rem] leading-7 text-slate-300 sm:text-lg sm:leading-8"
             id="hero-subtitle"
           >
             기업 문서, 한중 번역, 중국 시장조사, 해외영업 자료와 AI 업무 활용까지.
@@ -60,7 +60,7 @@ export default function Hero({ onNavigate }: HeroProps) {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.24 }}
-            className="mt-10 flex flex-wrap gap-4"
+            className="mt-8 flex flex-wrap gap-3 sm:mt-10 sm:gap-4"
           >
             <button
               onClick={() => onNavigate('inquiry')}
@@ -79,7 +79,7 @@ export default function Hero({ onNavigate }: HeroProps) {
             </button>
           </motion.div>
 
-          <div className="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-xs font-medium text-slate-400">
+          <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-3 text-[11px] font-medium text-slate-400 sm:mt-10 sm:flex sm:flex-wrap sm:gap-x-7 sm:text-xs">
             {['비대면 진행', '업무 범위 사전 확인', '보안 자료 협의', '납품 후 검수'].map((item) => (
               <span key={item} className="flex items-center gap-2">
                 <Check className="h-3.5 w-3.5 text-blue-300" />
@@ -87,16 +87,19 @@ export default function Hero({ onNavigate }: HeroProps) {
               </span>
             ))}
           </div>
+          <p className="mt-7 border-t border-white/10 pt-5 text-xs font-semibold tracking-wide text-blue-200 sm:hidden">
+            기업 문서 · 한중 번역 · 중국 조사 · AI 업무 지원
+          </p>
         </div>
 
         <motion.aside
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, delay: 0.18 }}
-          className="lg:col-span-5"
+          className="hidden sm:block lg:col-span-5"
           aria-label="AIVEXA 지원 분야"
         >
-          <div className="rounded-[2rem] border border-white/14 bg-white/[0.07] p-6 shadow-2xl shadow-black/20 backdrop-blur-sm sm:p-8">
+          <div className="rounded-[1.6rem] border border-white/14 bg-white/[0.07] p-5 shadow-2xl shadow-black/20 backdrop-blur-sm sm:rounded-[2rem] sm:p-8">
             <div className="flex items-center justify-between border-b border-white/10 pb-5">
               <div>
                 <p className="text-[11px] font-bold tracking-[0.2em] text-blue-300">PROJECT DESK</p>
@@ -105,14 +108,14 @@ export default function Hero({ onNavigate }: HeroProps) {
               <span className="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-[10px] font-bold text-emerald-200">상담 가능</span>
             </div>
 
-            <div className="mt-2 divide-y divide-white/10">
+            <div className="mt-3 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/10 lg:block lg:divide-y lg:divide-white/10 lg:rounded-none lg:bg-transparent">
               {supportAreas.map(({ icon: Icon, label }, index) => (
-                <div key={label} className="flex items-center gap-4 py-4">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-blue-200">
+                <div key={label} className="flex min-h-28 flex-col items-start gap-3 bg-[#111d36] p-4 lg:min-h-0 lg:flex-row lg:items-center lg:gap-4 lg:bg-transparent lg:px-0 lg:py-4">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-blue-200 lg:h-10 lg:w-10">
                     <Icon className="h-4.5 w-4.5" />
                   </span>
-                  <span className="flex-1 text-sm font-semibold text-slate-100">{label}</span>
-                  <span className="font-mono text-[10px] text-slate-500">0{index + 1}</span>
+                  <span className="flex-1 text-xs font-semibold leading-5 text-slate-100 sm:text-sm">{label}</span>
+                  <span className="hidden font-mono text-[10px] text-slate-500 lg:block">0{index + 1}</span>
                 </div>
               ))}
             </div>
