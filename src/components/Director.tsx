@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Award, Briefcase, Target, ShieldCheck, Image as ImageIcon } from 'lucide-react';
+import { Briefcase, Target, ShieldCheck, Check } from 'lucide-react';
 import { SiteConfig } from '../types';
 
 interface DirectorProps {
@@ -9,56 +9,31 @@ interface DirectorProps {
   onEditImage: (currentUrl?: string) => void;
 }
 
-export default function Director({ config, isAdminMode, onEditImage }: DirectorProps) {
+export default function Director({ config }: DirectorProps) {
   return (
-    <section className="bg-slate-50/50 py-20 sm:py-28" id="director">
+    <section className="bg-slate-50/50 py-16 sm:py-24 lg:py-28" id="director">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
           
-          {/* Left Side Portrait Card - Highly Professional Portrait */}
+          {/* Image-free professional credentials card */}
           <div className="lg:col-span-5 relative">
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="group/dirimg relative aspect-[4/5] w-full overflow-hidden rounded-3xl bg-slate-100 shadow-xl border border-slate-100 cursor-pointer"
-              onClick={() => onEditImage(config.imageUrl)}
+              className="relative overflow-hidden rounded-3xl bg-brand-navy p-8 text-white shadow-xl sm:p-10"
             >
-              <img
-                src={config.imageUrl}
-                alt="AIVEXA Project Director"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover/dirimg:scale-[1.02]"
-                referrerPolicy="no-referrer"
-                id="director-profile-image"
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  if (target.src.endsWith('/director.jpg') || target.src.includes('/director.jpg')) {
-                    target.src = '/director.png';
-                  } else if (target.src.endsWith('/director.png') || target.src.includes('/director.png')) {
-                    target.src = 'https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?auto=format&fit=crop&q=80&w=600';
-                  }
-                }}
-              />
-              
-              {/* Subtle visual gradient border at bottom */}
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 via-transparent to-transparent" />
-
-              <div className="absolute bottom-6 left-6 right-6 text-left">
-                <span className="inline-block rounded-full bg-brand-blue px-3 py-1 text-[10px] font-extrabold tracking-widest text-white uppercase mb-2">
-                  GLOBAL PRACTITIONER
-                </span>
-                <h4 className="font-display text-lg font-bold text-white tracking-tight">
-                  AIVEXA Project Director
-                </h4>
-              </div>
-
-              {/* Edit Hover Overlay */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover/dirimg:opacity-100 transition-all duration-300 backdrop-blur-xs">
-                <div className="flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs font-bold text-slate-800 shadow-lg transform translate-y-2 group-hover/dirimg:translate-y-0 transition-all duration-300">
-                  <ImageIcon className="h-4 w-4 text-brand-blue" />
-                  <span>클릭하여 이미지 변경</span>
-                </div>
+              <p className="text-xs font-bold tracking-[0.2em] text-blue-300">AIVEXA PROJECT LEAD</p>
+              <h3 className="mt-5 font-display text-3xl font-extrabold leading-tight">실무를 이해하는<span className="sm:hidden"> </span><br className="hidden sm:block" />프로젝트 파트너</h3>
+              <p className="mt-5 text-sm leading-7 text-slate-300">글로벌 무역·해외영업과 한중 비즈니스 커뮤니케이션 경험을 기반으로 필요한 결과물에 집중합니다.</p>
+              <div className="mt-8 space-y-4 border-t border-white/10 pt-7">
+                {['업무 목적과 납품 기준 확인', '책임 범위와 일정 사전 협의', '기업 자료의 보안 방식 협의'].map((item) => (
+                  <div key={item} className="flex items-center gap-3 text-sm font-medium text-slate-100">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-400/15"><Check className="h-3.5 w-3.5 text-blue-200" /></span>
+                    {item}
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -70,7 +45,7 @@ export default function Director({ config, isAdminMode, onEditImage }: DirectorP
             </span>
             
             <h2 className="font-display text-3xl font-extrabold tracking-tight text-brand-navy sm:text-4xl leading-tight">
-              실무 전문성에 기반한<br />
+              실무 전문성에 기반한<span className="sm:hidden"> </span><br className="hidden sm:block" />
               지속 가능한 실전 프로젝트 파트너십.
             </h2>
 

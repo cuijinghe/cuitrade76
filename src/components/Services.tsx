@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Building2, Heart, Store, Globe, Image as ImageIcon, ArrowUpRight } from 'lucide-react';
+import { Bot, Building2, FileText, Languages, Search, ArrowUpRight } from 'lucide-react';
 import { ServiceItem } from '../types';
 
 interface ServicesProps {
@@ -13,19 +13,20 @@ interface ServicesProps {
 
 // Icons mapping for visual diversity
 const iconMap: Record<string, React.ReactNode> = {
-  'service-1': <Building2 className="h-5 w-5 text-brand-navy" />,
-  'service-2': <Heart className="h-5 w-5 text-brand-navy" />,
-  'service-3': <Store className="h-5 w-5 text-brand-navy" />,
-  'service-4': <Globe className="h-5 w-5 text-brand-navy" />,
+  'service-1': <FileText className="h-5 w-5 text-white" />,
+  'service-2': <Languages className="h-5 w-5 text-white" />,
+  'service-3': <Search className="h-5 w-5 text-white" />,
+  'service-4': <Building2 className="h-5 w-5 text-white" />,
+  'service-5': <Bot className="h-5 w-5 text-white" />,
 };
 
-export default function Services({ title, items, isAdminMode, onEditItem, onNavigate }: ServicesProps) {
+export default function Services({ title, items, onNavigate }: ServicesProps) {
   return (
-    <section className="bg-slate-50/50 py-20 sm:py-28" id="services">
+    <section className="bg-slate-50/50 py-16 sm:py-24 lg:py-28" id="services">
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         
         {/* Section Header */}
-        <div className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between">
+        <div className="mb-10 flex flex-col md:mb-14 md:flex-row md:items-end md:justify-between">
           <div className="text-left">
             <p className="font-mono text-xs font-bold tracking-widest text-brand-blue uppercase mb-2">
               AIVEXA SOLUTIONS & OPERATIONS
@@ -35,12 +36,12 @@ export default function Services({ title, items, isAdminMode, onEditItem, onNavi
             </h2>
           </div>
           <p className="mt-4 md:mt-0 max-w-md text-sm text-slate-500 font-sans text-left md:text-right break-keep">
-            단순 AI 강의와 강사 연계를 넘어, 공공과 민간의 자원을 융합하여 실질적인 사회공헌 임팩트를 창출합니다.
+            필요한 업무만 선택해 의뢰할 수 있습니다. 요청 목적과 자료 상태를 확인한 뒤 적합한 작업 범위를 안내합니다.
           </p>
         </div>
 
         {/* 4 Cards Grid - Fully customizable & polished */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2" id="projects">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3" id="projects">
           {items.map((item, index) => (
             <motion.div
               key={item.id}
@@ -51,36 +52,16 @@ export default function Services({ title, items, isAdminMode, onEditItem, onNavi
               className="group relative flex flex-col overflow-hidden rounded-3xl bg-white border border-slate-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-navy/5"
               id={`service-card-${item.id}`}
             >
-              {/* Image Header Area */}
-              <div 
-                className="group/serviceimg relative aspect-[16/9] w-full overflow-hidden bg-slate-100 cursor-pointer"
-                onClick={() => onEditItem(item.id, item.imageUrl, item.title)}
-              >
-                <img
-                  src={item.imageUrl}
-                  alt={item.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover/serviceimg:scale-105"
-                  referrerPolicy="no-referrer"
-                  id={`service-img-${item.id}`}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                
-                {/* Custom icon badge top-left */}
-                <div className="absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md">
-                  {iconMap[item.id] || <Building2 className="h-5 w-5 text-brand-navy" />}
+              {/* Image-free service identifier */}
+              <div className="flex items-center justify-between bg-brand-navy px-6 py-6 sm:px-8">
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10">
+                  {iconMap[item.id] || <Building2 className="h-5 w-5 text-white" />}
                 </div>
-
-                {/* Edit Hover Overlay */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/45 opacity-0 group-hover/serviceimg:opacity-100 transition-all duration-300 backdrop-blur-xs">
-                  <div className="flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-bold text-slate-800 shadow-md transform translate-y-2 group-hover/serviceimg:translate-y-0 transition-all duration-300">
-                    <ImageIcon className="h-3.5 w-3.5 text-brand-blue" />
-                    <span>클릭하여 이미지 변경</span>
-                  </div>
-                </div>
+                <span className="font-mono text-xs font-bold tracking-[0.2em] text-white/45">0{index + 1}</span>
               </div>
 
               {/* Text Card Body */}
-              <div className="flex flex-1 flex-col p-8 sm:p-10 text-left">
+              <div className="flex flex-1 flex-col p-6 sm:p-8 text-left">
                 <h3 className="font-display text-xl font-bold tracking-tight text-brand-navy group-hover:text-brand-blue transition-colors duration-200">
                   {item.title}
                 </h3>

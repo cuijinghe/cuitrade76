@@ -1,6 +1,6 @@
 {
   "name": "AIVEXA",
-  "description": "AIVEXA는 공공기관, 지자체, 기업, 소상공인, 외국인을 위한 AI 교육, AI 업무혁신, 사회혁신 및 글로벌 협력 프로젝트를 기획·운영하는 AI 기반 프로젝트 플랫폼입니다.",
+  "description": "AIVEXA는 기업 문서, 한중·중한 번역, 중국 시장 기초조사, 해외영업 자료와 AI 활용 업무를 지원합니다.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Sparkles, Image as ImageIcon } from 'lucide-react';
+import { ArrowRight, Check, FileText, Languages, Search, Workflow } from 'lucide-react';
 import { SiteConfig } from '../types';
 
 interface HeroProps {
@@ -10,146 +10,123 @@ interface HeroProps {
   onEditImage: (currentUrl?: string) => void;
 }
 
-export default function Hero({ config, onNavigate, isAdminMode, onEditImage }: HeroProps) {
-  const titleLines = config.title.split('\n').map(l => l.trim()).filter(Boolean);
-  const mainTitle = titleLines[0] || '';
-  const subTitleLines = titleLines.slice(1);
+const supportAreas = [
+  { icon: FileText, label: '기업 문서·제안 자료' },
+  { icon: Languages, label: '한중 비즈니스 번역' },
+  { icon: Search, label: '중국 시장·업체 조사' },
+  { icon: Workflow, label: 'AI 업무 활용 지원' },
+];
 
+export default function Hero({ config, onNavigate }: HeroProps) {
+  const [headline, accent] = config.title.split('\n');
   return (
-    <section className="relative overflow-hidden bg-white py-16 sm:py-24 lg:py-32" id="hero">
-      {/* Decorative subtle background accents */}
-      <div className="absolute top-0 right-0 -z-10 h-[500px] w-[500px] rounded-full bg-slate-50/70 blur-3xl" />
-      <div className="absolute bottom-10 left-10 -z-10 h-[300px] w-[300px] rounded-full bg-blue-50/30 blur-3xl" />
+    <section className="relative overflow-hidden bg-[#081229] text-white" id="hero">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(46,92,255,0.22),transparent_34%),linear-gradient(135deg,transparent_0%,rgba(255,255,255,0.025)_48%,transparent_100%)]" />
+      <div className="absolute inset-y-0 right-[11%] hidden w-px bg-white/10 lg:block" />
 
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
-          
-          {/* Left Text Content */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
-            {/* Top Badge/Slogan */}
-            <motion.div 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mb-6 flex items-center gap-2 rounded-full bg-slate-50 border border-slate-100 px-4 py-1.5 text-xs font-bold tracking-widest text-slate-800"
-            >
-              <Sparkles className="h-3.5 w-3.5 text-brand-blue" />
-              <span>{config.slogan}</span>
-            </motion.div>
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-6 py-16 sm:px-8 sm:py-24 lg:grid-cols-12 lg:items-center lg:gap-16 lg:px-12 lg:py-28">
+        <div className="lg:col-span-7">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-3 border-l-2 border-[#4263ff] pl-4 text-xs font-bold tracking-[0.22em] text-blue-200"
+          >
+            AIVEXA · {config.slogan}
+          </motion.div>
 
-            {/* Main Premium Heading */}
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-display tracking-tight text-brand-navy"
-              id="hero-heading"
+          <motion.h1
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.08 }}
+            className="mt-7 max-w-4xl font-display text-[2.35rem] font-extrabold leading-[1.2] tracking-[-0.035em] text-white sm:text-5xl lg:text-[3.8rem]"
+            id="hero-heading"
+          >
+            {headline}
+            {accent && <span className="mt-2 block text-blue-300">{accent}</span>}
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.16 }}
+            className="mt-6 max-w-2xl text-[0.95rem] leading-7 text-slate-300 sm:text-lg sm:leading-8"
+            id="hero-subtitle"
+          >
+            {config.subtitle}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.24 }}
+            className="mt-8 flex flex-wrap gap-3 sm:mt-10 sm:gap-4"
+          >
+            <button
+              onClick={() => onNavigate('inquiry')}
+              className="group flex items-center gap-3 rounded-full bg-[#3155ff] px-7 py-4 text-sm font-bold text-white transition-all hover:bg-[#4263ff] hover:shadow-2xl hover:shadow-blue-950/40"
+              id="hero-btn-inquiry"
             >
-              <span className="block text-3xl sm:text-4xl lg:text-5xl font-extrabold lg:leading-[1.2] mb-4 break-keep md:whitespace-nowrap">
-                {mainTitle}
+              견적 문의하기
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </button>
+            <button
+              onClick={() => onNavigate('services')}
+              className="rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white transition-all hover:border-white/40 hover:bg-white/10"
+              id="hero-btn-services"
+            >
+              서비스 확인
+            </button>
+          </motion.div>
+
+          <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-3 text-[11px] font-medium text-slate-400 sm:mt-10 sm:flex sm:flex-wrap sm:gap-x-7 sm:text-xs">
+            {['비대면 진행', '업무 범위 사전 확인', '보안 자료 협의', '납품 후 검수'].map((item) => (
+              <span key={item} className="flex items-center gap-2">
+                <Check className="h-3.5 w-3.5 text-blue-300" />
+                {item}
               </span>
-              {subTitleLines.length > 0 && (
-                <span className="block text-xl sm:text-2xl lg:text-3xl font-bold lg:leading-[1.3] text-brand-navy/90 mt-2">
-                  {subTitleLines.map((line, i) => (
-                    <React.Fragment key={i}>
-                      {line}
-                      {i < subTitleLines.length - 1 && <br />}
-                    </React.Fragment>
-                  ))}
-                </span>
-              )}
-            </motion.h1>
-
-            {/* Subtitle */}
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-8 text-base sm:text-lg leading-relaxed text-slate-500 max-w-2xl font-sans break-keep"
-              id="hero-subtitle"
-            >
-              {config.subtitle}
-            </motion.p>
-
-            {/* Dynamic B2B Action Buttons */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-10 flex flex-wrap gap-4 sm:gap-5"
-            >
-              <button
-                onClick={() => onNavigate('inquiry')}
-                className="group flex items-center gap-2 rounded-full bg-brand-navy px-8 py-4 font-display text-sm font-semibold text-white transition-all hover:bg-brand-blue hover:shadow-xl hover:shadow-brand-blue/10 cursor-pointer"
-                id="hero-btn-inquiry"
-              >
-                <span>프로젝트 문의하기</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </button>
-              
-              <button
-                onClick={() => onNavigate('services')}
-                className="rounded-full border border-slate-200 bg-white px-8 py-4 font-display text-sm font-medium text-slate-700 transition-all hover:border-slate-800 hover:bg-slate-50 cursor-pointer"
-                id="hero-btn-services"
-              >
-                협력 분야 보기
-              </button>
-            </motion.div>
+            ))}
           </div>
-
-          {/* Right Card Image Area */}
-          <div className="lg:col-span-5 relative">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="group/heroimg relative aspect-[4/5] w-full overflow-hidden rounded-3xl bg-slate-100 shadow-2xl shadow-brand-navy/5 border border-slate-100 cursor-pointer"
-              onClick={() => onEditImage(config.imageUrl)}
-            >
-              {/* Primary Representative Photo */}
-              <img 
-                src={config.imageUrl} 
-                alt="AIVEXA AI 교육 업무혁신 사회혁신 프로젝트 기획 파트너 최경하 대표" 
-                className="h-full w-full object-cover transition-transform duration-700 group-hover/heroimg:scale-[1.03]"
-                referrerPolicy="no-referrer"
-                id="hero-representative-image"
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  if (target.src.endsWith('/hero.jpg') || target.src.includes('/hero.jpg')) {
-                    target.src = '/hero.png';
-                  } else if (target.src.endsWith('/hero.png') || target.src.includes('/hero.png')) {
-                    target.src = 'https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?auto=format&fit=crop&q=80&w=600';
-                  }
-                }}
-              />
-
-              {/* Gradient Scrim for readable overlay text */}
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/95 via-brand-navy/40 to-transparent" />
-
-              {/* Absolute Text Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-10 text-left">
-                <p className="font-mono text-xs font-bold tracking-widest text-brand-blue/90 mb-1.5 uppercase">
-                  {config.imageTagline}
-                </p>
-                <h3 className="font-display text-lg sm:text-xl font-bold text-white tracking-tight leading-snug break-keep">
-                  {config.imageSubTagline}
-                </h3>
-              </div>
-
-              {/* Edit Hover Overlay */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 opacity-0 group-hover/heroimg:opacity-100 transition-all duration-300 backdrop-blur-xs">
-                <div className="flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs font-bold text-slate-800 shadow-lg transform translate-y-2 group-hover/heroimg:translate-y-0 transition-all duration-300">
-                  <ImageIcon className="h-4 w-4 text-brand-blue" />
-                  <span>클릭하여 이미지 변경</span>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Design detail: Elegant floating label card behind it */}
-            <div className="absolute -bottom-6 -right-6 -z-10 hidden h-32 w-32 rounded-full border border-slate-100 bg-slate-50/50 sm:block" />
-          </div>
-
+          <p className="mt-7 border-t border-white/10 pt-5 text-xs font-semibold tracking-wide text-blue-200 sm:hidden">
+            기업 문서 · 한중 번역 · 중국 조사 · AI 업무 지원
+          </p>
         </div>
+
+        <motion.aside
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7, delay: 0.18 }}
+          className="hidden sm:block lg:col-span-5"
+          aria-label="AIVEXA 지원 분야"
+        >
+          <div className="rounded-[1.6rem] border border-white/14 bg-white/[0.07] p-5 shadow-2xl shadow-black/20 backdrop-blur-sm sm:rounded-[2rem] sm:p-8">
+            <div className="flex items-center justify-between border-b border-white/10 pb-5">
+              <div>
+                <p className="text-[11px] font-bold tracking-[0.2em] text-blue-300">PROJECT DESK</p>
+                <h2 className="mt-2 text-xl font-bold text-white">기업 실무 통합 지원</h2>
+              </div>
+              <span className="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-[10px] font-bold text-emerald-200">상담 가능</span>
+            </div>
+
+            <div className="mt-3 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/10 lg:block lg:divide-y lg:divide-white/10 lg:rounded-none lg:bg-transparent">
+              {supportAreas.map(({ icon: Icon, label }, index) => (
+                <div key={label} className="flex min-h-28 flex-col items-start gap-3 bg-[#111d36] p-4 lg:min-h-0 lg:flex-row lg:items-center lg:gap-4 lg:bg-transparent lg:px-0 lg:py-4">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-blue-200 lg:h-10 lg:w-10">
+                    <Icon className="h-4.5 w-4.5" />
+                  </span>
+                  <span className="flex-1 text-xs font-semibold leading-5 text-slate-100 sm:text-sm">{label}</span>
+                  <span className="hidden font-mono text-[10px] text-slate-500 lg:block">0{index + 1}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-5 rounded-2xl bg-white/[0.06] px-5 py-4">
+              <p className="text-xs leading-6 text-slate-300">
+                요청 내용을 확인한 뒤 <strong className="font-semibold text-white">가능 범위·일정·견적</strong>을 안내합니다.
+              </p>
+            </div>
+          </div>
+        </motion.aside>
       </div>
     </section>
   );

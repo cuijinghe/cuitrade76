@@ -15,6 +15,28 @@
   html {
     scroll-behavior: smooth;
   }
+
+  body {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    word-break: keep-all;
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  button,
+  a,
+  label {
+    word-break: keep-all;
+  }
 }
 
 /* Custom fade effects */
