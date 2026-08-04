@@ -108,13 +108,15 @@ export default function Header({ onNavigate, activeSection, currentPath, onLogoC
         <div className="flex items-center gap-2 sm:gap-3">
           <a
             href="https://book.aivexa.co.kr/login"
-            className="hidden text-xs font-bold text-slate-600 transition-colors hover:text-brand-blue sm:block"
+            className="flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-2.5 text-[11px] font-bold text-brand-navy transition-colors hover:border-brand-blue hover:text-brand-blue sm:px-4 sm:text-xs"
           >
-            로그인
+            <LogIn className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">로그인·회원가입</span>
+            <span className="sm:hidden">로그인</span>
           </a>
           <button
             onClick={() => onNavigate('inquiry')}
-            className="rounded-full bg-brand-navy px-4 py-2.5 font-display text-xs font-semibold text-white transition-all hover:bg-brand-blue hover:shadow-lg hover:shadow-brand-blue/15 cursor-pointer sm:px-5"
+            className="hidden rounded-full bg-brand-navy px-4 py-2.5 font-display text-xs font-semibold text-white transition-all hover:bg-brand-blue hover:shadow-lg hover:shadow-brand-blue/15 cursor-pointer md:block sm:px-5"
             id="cta-inquiry-nav"
           >
             상담 요청
@@ -133,7 +135,7 @@ export default function Header({ onNavigate, activeSection, currentPath, onLogoC
 
       {isMenuOpen && (
         <div className="absolute left-0 right-0 top-full border-t border-slate-100 bg-white shadow-2xl shadow-slate-900/10">
-          <div className="mx-auto grid max-w-7xl gap-8 px-6 py-8 sm:px-8 md:grid-cols-3 lg:px-12">
+          <div className="mx-auto grid max-w-7xl gap-6 px-6 py-8 sm:px-8 md:grid-cols-3 lg:px-12">
             <div className="md:col-span-2">
               <p className="text-[10px] font-bold tracking-[0.22em] text-brand-blue">AIVEXA MENU</p>
               <div className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:grid-cols-3">
@@ -154,15 +156,15 @@ export default function Header({ onNavigate, activeSection, currentPath, onLogoC
               </div>
             </div>
             <div className="rounded-2xl bg-[#081229] p-6 text-white">
-              <p className="text-[10px] font-bold tracking-[0.2em] text-blue-300">MEMBER ACCESS</p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">전자책 사이트의 기존 회원계정을 그대로 이용합니다.</p>
+              <p className="text-[10px] font-bold tracking-[0.2em] text-blue-300">CUSTOMER DESK</p>
+              <p className="mt-3 text-sm leading-6 text-slate-300">회원정보와 전자책 구매내역은 기존 마이페이지에서 확인할 수 있습니다.</p>
               <div className="mt-5 grid gap-2">
-                <a href="https://book.aivexa.co.kr/login" className="flex items-center justify-between rounded-xl bg-white px-4 py-3 text-xs font-bold text-brand-navy">
-                  <span className="flex items-center gap-2"><LogIn className="h-4 w-4" />로그인·회원가입</span><span>→</span>
-                </a>
-                <a href="https://book.aivexa.co.kr/account" className="flex items-center justify-between rounded-xl border border-white/15 px-4 py-3 text-xs font-bold text-white">
+                <a href="https://book.aivexa.co.kr/account" className="flex items-center justify-between rounded-xl bg-white px-4 py-3 text-xs font-bold text-brand-navy">
                   <span className="flex items-center gap-2"><UserRound className="h-4 w-4" />마이페이지</span><span>→</span>
                 </a>
+                <button onClick={() => navigateAndClose('inquiry')} className="flex items-center justify-between rounded-xl border border-white/15 px-4 py-3 text-xs font-bold text-white">
+                  <span>프로젝트 상담 요청</span><span>→</span>
+                </button>
               </div>
             </div>
           </div>
